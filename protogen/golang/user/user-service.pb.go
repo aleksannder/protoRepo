@@ -383,9 +383,9 @@ type CreateUserRequest struct {
 
 	Username  string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 	FirstName string `protobuf:"bytes,2,opt,name=firstName,proto3" json:"firstName,omitempty"`
-	Surname   string `protobuf:"bytes,3,opt,name=surname,proto3" json:"surname,omitempty"`
-	Role      Role   `protobuf:"varint,4,opt,name=role,proto3,enum=user.Role" json:"role,omitempty"`
-	Email     string `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
+	Surname string `protobuf:"bytes,3,opt,name=surname,proto3" json:"surname,omitempty"`
+	Role    Role   `protobuf:"varint,4,opt,name=role,proto3,enum=user.Role" json:"role,omitempty"`
+	Email   string `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
 	Password  string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
 	Active    bool   `protobuf:"varint,7,opt,name=Active,proto3" json:"Active,omitempty"`
 }
@@ -575,9 +575,9 @@ type UpdateUserRequest struct {
 	Id        string   `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id,omitempty"`
 	Username  string   `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	FirstName string   `protobuf:"bytes,3,opt,name=firstName,proto3" json:"firstName,omitempty"`
-	Surname   string   `protobuf:"bytes,4,opt,name=surname,proto3" json:"surname,omitempty"`
-	Role      Role     `protobuf:"varint,5,opt,name=role,proto3,enum=user.Role" json:"role,omitempty"`
-	Email     string   `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	Surname string `protobuf:"bytes,4,opt,name=surname,proto3" json:"surname,omitempty"`
+	Role    Role   `protobuf:"varint,5,opt,name=role,proto3,enum=user.Role" json:"role,omitempty"`
+	Email   string `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
 	Password  string   `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
 	Active    bool     `protobuf:"varint,8,opt,name=Active,proto3" json:"Active,omitempty"`
 	Projects  []string `protobuf:"bytes,9,rep,name=projects,proto3" json:"projects,omitempty"`
@@ -729,9 +729,9 @@ type GetUserByUsernameResponse struct {
 	Id        string   `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id,omitempty"`
 	Username  string   `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	FirstName string   `protobuf:"bytes,3,opt,name=firstName,proto3" json:"firstName,omitempty"`
-	Surname   string   `protobuf:"bytes,4,opt,name=surname,proto3" json:"surname,omitempty"`
-	Role      Role     `protobuf:"varint,5,opt,name=role,proto3,enum=user.Role" json:"role,omitempty"`
-	Email     string   `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	Surname string `protobuf:"bytes,4,opt,name=surname,proto3" json:"surname,omitempty"`
+	Role    Role   `protobuf:"varint,5,opt,name=role,proto3,enum=user.Role" json:"role,omitempty"`
+	Email   string `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
 	Password  string   `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
 	Active    bool     `protobuf:"varint,8,opt,name=Active,proto3" json:"Active,omitempty"`
 	Projects  []string `protobuf:"bytes,9,rep,name=projects,proto3" json:"projects,omitempty"`
@@ -1022,7 +1022,7 @@ var file_user_service_proto_rawDesc = []byte{
 	0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
 	0x73, 0x73, 0x2a, 0x1f, 0x0a, 0x04, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x45,
 	0x4d, 0x42, 0x45, 0x52, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x4d, 0x41, 0x4e, 0x41, 0x47, 0x45,
-	0x52, 0x10, 0x01, 0x32, 0xd5, 0x06, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76,
+	0x52, 0x10, 0x01, 0x32, 0xdf, 0x07, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76,
 	0x69, 0x63, 0x65, 0x12, 0x5e, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79,
 	0x49, 0x64, 0x12, 0x18, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65,
 	0x72, 0x42, 0x79, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x75,
@@ -1075,9 +1075,17 @@ var file_user_service_proto_rawDesc = []byte{
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x44, 0x65, 0x6c,
 	0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
 	0x1a, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x14, 0x2a, 0x12, 0x2f, 0x76, 0x31, 0x2f, 0x75, 0x73, 0x65,
-	0x72, 0x73, 0x2f, 0x7b, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x7d, 0x42, 0x0c, 0x5a, 0x0a, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x72, 0x73, 0x2f, 0x7b, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x7d, 0x12, 0x87, 0x01, 0x0a, 0x15,
+	0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72, 0x46, 0x72, 0x6f, 0x6d, 0x50, 0x72,
+	0x6f, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x1d, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x41, 0x64, 0x64,
+	0x55, 0x73, 0x65, 0x72, 0x54, 0x6f, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x41, 0x64, 0x64, 0x55,
+	0x73, 0x65, 0x72, 0x54, 0x6f, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x29, 0x2a, 0x27, 0x2f, 0x76,
+	0x31, 0x2f, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x2f, 0x7b, 0x70, 0x72, 0x6f, 0x6a,
+	0x65, 0x63, 0x74, 0x49, 0x64, 0x7d, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x73, 0x2f, 0x7b, 0x75, 0x73,
+	0x65, 0x72, 0x49, 0x64, 0x7d, 0x42, 0x0c, 0x5a, 0x0a, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x75,
+	0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1125,16 +1133,18 @@ var file_user_service_proto_depIdxs = []int32{
 	10, // 10: user.UserService.UpdateUser:input_type -> user.UpdateUserRequest
 	11, // 11: user.UserService.GetUserByUsername:input_type -> user.GetUserByUsernameRequest
 	13, // 12: user.UserService.DeleteUser:input_type -> user.DeleteUserRequest
-	2,  // 13: user.UserService.GetUserById:output_type -> user.GetUserByIdResponse
-	4,  // 14: user.UserService.GetAllUsers:output_type -> user.GetAllUsersResponse
-	6,  // 15: user.UserService.GetAllUsersByProjectId:output_type -> user.GetAllUsersByProjectIdResponse
-	9,  // 16: user.UserService.AddUserToProject:output_type -> user.AddUserToProjectResponse
-	2,  // 17: user.UserService.CreateUser:output_type -> user.GetUserByIdResponse
-	2,  // 18: user.UserService.UpdateUser:output_type -> user.GetUserByIdResponse
-	12, // 19: user.UserService.GetUserByUsername:output_type -> user.GetUserByUsernameResponse
-	14, // 20: user.UserService.DeleteUser:output_type -> user.DeleteUserResponse
-	13, // [13:21] is the sub-list for method output_type
-	5,  // [5:13] is the sub-list for method input_type
+	8,  // 13: user.UserService.RemoveUserFromProject:input_type -> user.AddUserToProjectRequest
+	2,  // 14: user.UserService.GetUserById:output_type -> user.GetUserByIdResponse
+	4,  // 15: user.UserService.GetAllUsers:output_type -> user.GetAllUsersResponse
+	6,  // 16: user.UserService.GetAllUsersByProjectId:output_type -> user.GetAllUsersByProjectIdResponse
+	9,  // 17: user.UserService.AddUserToProject:output_type -> user.AddUserToProjectResponse
+	2,  // 18: user.UserService.CreateUser:output_type -> user.GetUserByIdResponse
+	2,  // 19: user.UserService.UpdateUser:output_type -> user.GetUserByIdResponse
+	12, // 20: user.UserService.GetUserByUsername:output_type -> user.GetUserByUsernameResponse
+	14, // 21: user.UserService.DeleteUser:output_type -> user.DeleteUserResponse
+	9,  // 22: user.UserService.RemoveUserFromProject:output_type -> user.AddUserToProjectResponse
+	14, // [14:23] is the sub-list for method output_type
+	5,  // [5:14] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name

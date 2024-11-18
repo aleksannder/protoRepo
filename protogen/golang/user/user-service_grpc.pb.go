@@ -27,6 +27,7 @@ const (
 	UserService_UpdateUser_FullMethodName             = "/user.UserService/UpdateUser"
 	UserService_GetUserByUsername_FullMethodName      = "/user.UserService/GetUserByUsername"
 	UserService_DeleteUser_FullMethodName             = "/user.UserService/DeleteUser"
+	UserService_RemoveUserFromProject_FullMethodName  = "/user.UserService/RemoveUserFromProject"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -41,6 +42,7 @@ type UserServiceClient interface {
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*GetUserByIdResponse, error)
 	GetUserByUsername(ctx context.Context, in *GetUserByUsernameRequest, opts ...grpc.CallOption) (*GetUserByUsernameResponse, error)
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
+	RemoveUserFromProject(ctx context.Context, in *AddUserToProjectRequest, opts ...grpc.CallOption) (*AddUserToProjectResponse, error)
 }
 
 type userServiceClient struct {
@@ -131,6 +133,16 @@ func (c *userServiceClient) DeleteUser(ctx context.Context, in *DeleteUserReques
 	return out, nil
 }
 
+func (c *userServiceClient) RemoveUserFromProject(ctx context.Context, in *AddUserToProjectRequest, opts ...grpc.CallOption) (*AddUserToProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddUserToProjectResponse)
+	err := c.cc.Invoke(ctx, UserService_RemoveUserFromProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -143,6 +155,7 @@ type UserServiceServer interface {
 	UpdateUser(context.Context, *UpdateUserRequest) (*GetUserByIdResponse, error)
 	GetUserByUsername(context.Context, *GetUserByUsernameRequest) (*GetUserByUsernameResponse, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
+	RemoveUserFromProject(context.Context, *AddUserToProjectRequest) (*AddUserToProjectResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -176,6 +189,9 @@ func (UnimplementedUserServiceServer) GetUserByUsername(context.Context, *GetUse
 }
 func (UnimplementedUserServiceServer) DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (UnimplementedUserServiceServer) RemoveUserFromProject(context.Context, *AddUserToProjectRequest) (*AddUserToProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveUserFromProject not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -342,6 +358,24 @@ func _UserService_DeleteUser_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_RemoveUserFromProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddUserToProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).RemoveUserFromProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_RemoveUserFromProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).RemoveUserFromProject(ctx, req.(*AddUserToProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -380,6 +414,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUser",
 			Handler:    _UserService_DeleteUser_Handler,
+		},
+		{
+			MethodName: "RemoveUserFromProject",
+			Handler:    _UserService_RemoveUserFromProject_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
