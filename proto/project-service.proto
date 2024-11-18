@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package project;
+
+option go_package = "proto/project";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+service ProjectService {
+  rpc InsertProject(InsertProjectRequest) returns (InsertProjectResponse) {
+    option (google.api.http) = {
+      post: "/v1/projects"
+      body: "*"
+    };
+  }
+  rpc FindAllProjects(FindAllProjectsRequest) returns (FindAllProjectsResponse) {
+    option (google.api.http) = {
+      get: "/v1/projects"
+    };
+  }
+  rpc FindProjectById(FindProjectByIdRequest) returns (FindProjectByIdResponse) {
+    option (google.api.http) = {
+      get: "/v1/projects/{projectId}"
+    };
+  }
+  rpc AddUser(AddUserToProjectRequest) returns (AddUserToProjectResponse) {
+    option (google.api.http) = {
+      get: "/v1/projects/{projectId}/users/{userId}"
+    };
+  }
+  rpc GetProjectsByUserId(GetProjectsByUserIdRequest) returns (GetProjectsByUserIdResponse) {
+    option (google.api.http) = {
+      get: "/v1/projects/{userId}/projects"
+    };
+  }
+  rpc DeleteProject(DeleteProjectRequest) returns (DeleteProjectResponse) {
+    option (google.api.http) = {
+      delete: "/v1/projects/{projectId}"
+    };
+  }
+}
+
+message Project {
+  string projectId = 1;
+  string name = 2;
+  google.protobuf.Timestamp expectedEndDate = 3;
+  int32 minParticipants = 4;
+  int32 maxParticipants = 5;
+  string managerId = 6;
+}
+
+message InsertProjectRequest {
+  string name = 1;
+  google.protobuf.Timestamp expectedEndDate = 2;
+  int32 minParticipants = 3;
+  int32 maxParticipants = 4;
+  string managerUsername = 5;
+}
+
+message InsertProjectResponse {
+  bool accepted = 1;
+}
+
+message FindAllProjectsRequest {
+  string username = 1;
+}
+
+message FindAllProjectsResponse {
+  repeated FindProjectByIdResponse projects = 1;
+}
+
+message FindProjectByIdRequest {
+  string projectId = 1;
+}
+
+message FindProjectByIdResponse {
+  string projectId = 1;
+  string name = 2;
+  google.protobuf.Timestamp expectedEndDate = 3;
+  int32 minParticipants = 4;
+  int32 maxParticipants = 5;
+  string managerId = 6;
+}
+
+message AddUserToProjectRequest {
+  string userId = 1;
+  string projectId = 2;
+}
+
+message AddUserToProjectResponse {
+  bool accepted = 1;
+}
+
+message GetProjectsByUserIdRequest {
+  string userId = 1;
+}
+
+message GetProjectsByUserIdResponse {
+  repeated Project projects = 1;
+}
+
+message DeleteProjectRequest {
+  string projectId = 1;
+}
+
+message DeleteProjectResponse {
+  bool deleted = 1;
+}

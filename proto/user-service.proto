@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "proto/user";
+
+import "google/api/annotations.proto";
+
+service UserService {
+  rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse) {
+    option (google.api.http) = {
+      get: "/v1/users/{userId}"
+    };
+  };
+  rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse) {
+    option (google.api.http) = {
+      get: "/v1/users"
+    };
+  };
+  rpc GetAllUsersByProjectId(GetAllUsersByProjectIdRequest) returns (GetAllUsersByProjectIdResponse) {
+    option (google.api.http) = {
+      get: "/v1/users/projects/{projectId}"
+    };
+  }
+  rpc AddUserToProject(AddUserToProjectRequest) returns (AddUserToProjectResponse) {
+    option (google.api.http) = {
+      post: "/v1/projects/{projectId}/users/{userId}"
+    };
+  }
+  rpc CreateUser(CreateUserRequest) returns (GetUserByIdResponse) {
+    option (google.api.http) = {
+      post: "/v1/users"
+    };
+  }
+  rpc UpdateUser(UpdateUserRequest) returns (GetUserByIdResponse) {
+    option (google.api.http) = {
+      put: "/v1/users"
+      body: "*"
+    };
+  }
+  rpc GetUserByUsername(GetUserByUsernameRequest) returns (GetUserByUsernameResponse) {
+    option (google.api.http) = {
+      get: "/v1/users/{username}"
+    };
+  }
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+    option (google.api.http) = {
+      delete: "/v1/users/{userId}"
+    };
+  }
+}
+
+message GetUserByIdRequest {
+  string userId = 1;
+}
+
+message GetUserByIdResponse {
+  string id = 1;                 // MongoDB ObjectID as a string
+  string username = 2;           // Username of the user
+  string firstName = 3;         // First name of the user
+  string surname = 4;            // Surname of the user
+  string email = 5;              // Email address of the user
+  repeated string projects = 6;  // List of project IDs
+  bool active = 7;               // User's active status
+}
+
+message GetAllUsersRequest {
+
+}
+
+message GetAllUsersResponse {
+  repeated GetUserByIdResponse users = 1;
+}
+
+message GetAllUsersByProjectIdRequest {
+  string projectId = 1;
+}
+
+message GetAllUsersByProjectIdResponse {
+  repeated GetUserByIdResponse users = 1;
+}
+
+enum Role {
+  MEMBER = 0;
+  MANAGER = 1;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string firstName = 2;
+  string surname = 3;
+  Role role = 4;
+  string email = 5;
+  string password = 6;
+  bool Active = 7;
+}
+
+message AddUserToProjectRequest {
+  string projectId = 1;
+  string userId = 2;
+}
+
+message AddUserToProjectResponse {
+  bool active = 1;
+}
+
+message UpdateUserRequest {
+  string Id = 1;
+  string username = 2;
+  string firstName = 3;
+  string surname = 4;
+  Role role = 5;
+  string email = 6;
+  string password = 7;
+  bool Active = 8;
+  repeated string projects = 9;
+}
+
+message GetUserByUsernameRequest {
+  string username = 1;
+}
+
+message GetUserByUsernameResponse {
+  string Id = 1;
+  string username = 2;
+  string firstName = 3;
+  string surname = 4;
+  Role role = 5;
+  string email = 6;
+  string password = 7;
+  bool Active = 8;
+  repeated string projects = 9;
+}
+
+message DeleteUserRequest {
+  string userId = 1;
+}
+
+message DeleteUserResponse {
+  bool success = 1;
+}
