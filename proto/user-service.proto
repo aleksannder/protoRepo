@@ -12,6 +12,11 @@ service UserService {
       get: "/v1/users/{userId}"
     };
   };
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByIdResponse) {
+    option (google.api.http) = {
+      get: "/v1/users/{userEmail}"
+    };
+  };
   rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse) {
     option (google.api.http) = {
       get: "/v1/users"
@@ -67,6 +72,10 @@ message GetUserByIdResponse {
   string email = 5;              // Email address of the user
   repeated string projects = 6;  // List of project IDs
   bool active = 7;               // User's active status
+}
+
+message GetUserByEmailRequest {
+  string userEmail = 1;
 }
 
 message GetAllUsersRequest {
