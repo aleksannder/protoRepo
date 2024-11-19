@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package notification;
+
+option go_package = "proto/notification";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+
+service NotificationService {
+  rpc CreateNotification(CreateNotificationRequest) returns (CreateNotificationResponse) {
+    option (google.api.http) = {
+      post: "/v1/notifications"
+      body: "*"
+    };
+  }
+}
+
+message Notification {
+  string id = 1; 
+  string title = 2;
+  string description = 3; 
+  repeated string users = 4; 
+}
+
+message CreateNotificationRequest {
+  string title = 1; 
+  string description = 2; 
+  repeated string users = 3; 
+}
+
+message CreateNotificationResponse {
+  bool success = 1;
+}
