@@ -15,6 +15,11 @@ service NotificationService {
       body: "*"
     };
   }
+   rpc GetAllNotifications(GetAllNotificationRequest) returns (GetAllNotificationsResponse) {
+    option (google.api.http) = {
+      get: "/v1/getallnotifications"
+    };
+  }
 }
 
 message Notification {
@@ -32,4 +37,10 @@ message CreateNotificationRequest {
 
 message CreateNotificationResponse {
   bool success = 1;
+}
+
+message GetAllNotificationRequest {}
+
+message GetAllNotificationsResponse {
+  repeated Notification notifications = 1;
 }
