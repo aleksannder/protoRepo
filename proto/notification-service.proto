@@ -17,7 +17,7 @@ service NotificationService {
   }
    rpc GetAllNotifications(GetAllNotificationRequest) returns (GetAllNotificationsResponse) {
     option (google.api.http) = {
-      get: "/v1/getallnotifications"
+      get: "/v1/notifications/getallnotifications"
     };
   }
 }

@@ -115,7 +115,7 @@ func RegisterNotificationServiceHandlerServer(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/notification.NotificationService/GetAllNotifications", runtime.WithHTTPPathPattern("/v1/getallnotifications"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/notification.NotificationService/GetAllNotifications", runtime.WithHTTPPathPattern("/v1/notifications/getallnotifications"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -201,7 +201,7 @@ func RegisterNotificationServiceHandlerClient(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/notification.NotificationService/GetAllNotifications", runtime.WithHTTPPathPattern("/v1/getallnotifications"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/notification.NotificationService/GetAllNotifications", runtime.WithHTTPPathPattern("/v1/notifications/getallnotifications"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -223,7 +223,7 @@ func RegisterNotificationServiceHandlerClient(ctx context.Context, mux *runtime.
 var (
 	pattern_NotificationService_CreateNotification_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "notifications"}, ""))
 
-	pattern_NotificationService_GetAllNotifications_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "getallnotifications"}, ""))
+	pattern_NotificationService_GetAllNotifications_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "notifications", "getallnotifications"}, ""))
 )
 
 var (
