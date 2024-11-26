@@ -16,7 +16,12 @@ service NotificationService {
   }
    rpc GetAllNotifications(GetAllNotificationRequest) returns (GetAllNotificationsResponse) {
     option (google.api.http) = {
-      get: "/v1/notifications/getallnotifications"
+      get: "/v1/notifications"
+    };
+  }
+  rpc MarkAsRead(MarkAsReadNotificationRequest) returns (MarkAsReadNotificationResponse) {
+    option (google.api.http) = {
+      patch: "/v1/notifications/{id}"
     };
   }
 }
