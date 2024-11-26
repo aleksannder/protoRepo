@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package workflow;
+
+option go_package = "proto/workflow";
+
+import "google/api/annotations.proto";
+
+service WorkflowService {
+  rpc GetWorkflowById(GetWorkflowByIdRequest) returns (GetWorkflowByIdResponse) {
+    option (google.api.http) = {
+      get: "/v1/workflows/{workflowId}"
+    };
+  }
+
+  rpc InsertWorkflow(InsertWorkflowRequest) returns (InsertWorkflowResponse) {
+    option (google.api.http) = {
+      post: "/v1/workflows"
+    };
+  }
+
+  rpc GetWorkflowsByProjectId(GetWorkflowsByProjectIdRequest) returns (GetWorkflowsByProjectIdResponse) {
+    option (google.api.http) = {
+      get: "/v1/workflows/projects/{projectId}"
+    };
+  }
+}
+
+message GetWorkflowByIdRequest {
+  string workflowId = 1;
+}
+
+message GetWorkflowByIdResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  repeated Task tasks = 4;
+  string projectId = 5;
+}
+
+message GetWorkflowsByProjectIdRequest {
+  string projectId = 1;
+}
+
+message GetWorkflowsByProjectIdResponse {
+  repeated GetWorkflowByIdResponse workflows = 1;
+}
+
+message InsertWorkflowRequest {
+  string name = 1;
+  string description = 2;
+  repeated Task tasks = 3;
+  string projectId = 4;
+}
+
+message InsertWorkflowResponse {
+  GetWorkflowByIdResponse response = 1;
+}
+
+message Task {
+  string id = 1;
+  string state = 2;
+  string name = 3;
+  repeated Task dependsOn = 4;
+  string projectId = 5;
+  string workflowId = 6;
+}
