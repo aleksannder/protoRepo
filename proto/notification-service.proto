@@ -5,7 +5,6 @@ package notification;
 option go_package = "proto/notification";
 
 import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
 
 
 service NotificationService {
@@ -43,4 +42,12 @@ message GetAllNotificationRequest {}
 
 message GetAllNotificationsResponse {
   repeated Notification notifications = 1;
+}
+
+message MarkAsReadNotificationRequest {
+  string id = 1;
+}
+
+message MarkAsReadNotificationResponse {
+  bool success = 1;
 }
