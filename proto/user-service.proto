@@ -58,6 +58,11 @@ service UserService {
       delete: "/v1/projects/{projectId}/users/{userId}"
     };
   }
+  rpc RemoveUserFromProjectOnProjectDelete(AddUserToProjectRequest) returns (AddUserToProjectResponse) {
+    option (google.api.http) = {
+      delete: "/v1/users/{userId}/projects/{projectId}"
+    };
+  }
 }
 
 message GetUserByIdRequest {
