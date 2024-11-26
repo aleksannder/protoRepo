@@ -59,9 +59,16 @@ message InsertWorkflowResponse {
 
 message Task {
   string id = 1;
-  string state = 2;
+  TaskState state = 2;
   string name = 3;
   repeated Task dependsOn = 4;
   string projectId = 5;
   string workflowId = 6;
+}
+
+enum TaskState {
+  STATE_UNSPECIFIED = 0;      // Default value if none specified.
+  ON_HOLD = 1;                // Corresponds to "on hold" in Go.
+  UNDER_CONSTRUCTION = 2;     // Corresponds to "under construction" in Go.
+  FINISHED = 3;               // Corresponds to "finished" in Go.
 }
