@@ -16,6 +16,7 @@ service WorkflowService {
   rpc InsertWorkflow(InsertWorkflowRequest) returns (InsertWorkflowResponse) {
     option (google.api.http) = {
       post: "/v1/workflows"
+      body: "*"
     };
   }
 
