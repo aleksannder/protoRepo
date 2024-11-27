@@ -36,14 +36,14 @@ message Notification {
   string id = 1; 
   string title = 2;
   string description = 3; 
-  repeated string users = 4; 
+  string userId = 4; 
   bool read = 5;
 }
 
 message CreateNotificationRequest {
   string title = 1; 
   string description = 2; 
-  repeated string users = 3; 
+  string userId = 3; 
 }
 
 message CreateNotificationResponse {
