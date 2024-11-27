@@ -19,6 +19,11 @@ service NotificationService {
       get: "/v1/notifications"
     };
   }
+  rpc GetAllNotificationsByUser(GetAllNotificationsByUserRequest) returns (GetAllNotificationsByUserResponse) {
+    option (google.api.http) = {
+      get: "/v1/notifications/{userId}"
+    };
+  }
   rpc MarkAsRead(MarkAsReadNotificationRequest) returns (MarkAsReadNotificationResponse) {
     option (google.api.http) = {
       patch: "/v1/notifications/{id}"
@@ -48,6 +53,14 @@ message CreateNotificationResponse {
 message GetAllNotificationRequest {}
 
 message GetAllNotificationsResponse {
+  repeated Notification notifications = 1;
+}
+
+message GetAllNotificationsByUserRequest {
+  string userId = 1;
+}
+
+message GetAllNotificationsByUserResponse {
   repeated Notification notifications = 1;
 }
 
