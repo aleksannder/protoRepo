@@ -44,17 +44,11 @@ message GetWorkflowsByProjectIdResponse {
 }
 
 message InsertWorkflowRequest {
-  Project project = 1;
+  Workflow project = 1;
 }
 
 message InsertWorkflowResponse {
   Workflow response = 1;
-}
-
-message Project {
-  string id = 1;
-  string name = 2;
-  repeated Workflow workflows = 3;
 }
 
 message Workflow {
