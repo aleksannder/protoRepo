@@ -47,7 +47,7 @@ message CreateNotificationRequest {
 }
 
 message CreateNotificationResponse {
-  bool success = 1;
+  Notification notification = 1;
 }
 
 message GetAllNotificationRequest {}
