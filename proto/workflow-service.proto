@@ -32,11 +32,7 @@ message GetWorkflowByIdRequest {
 }
 
 message GetWorkflowByIdResponse {
-  string id = 1;
-  string name = 2;
-  string description = 3;
-  repeated Task tasks = 4;
-  string projectId = 5;
+  Workflow response = 1;
 }
 
 message GetWorkflowsByProjectIdRequest {
@@ -44,32 +40,35 @@ message GetWorkflowsByProjectIdRequest {
 }
 
 message GetWorkflowsByProjectIdResponse {
-  repeated GetWorkflowByIdResponse workflows = 1;
+  repeated Workflow workflows = 1;
 }
 
 message InsertWorkflowRequest {
-  string name = 1;
-  string description = 2;
-  repeated Task tasks = 3;
-  string projectId = 4;
+  Project project = 1;
 }
 
 message InsertWorkflowResponse {
-  GetWorkflowByIdResponse response = 1;
+  Workflow response = 1;
+}
+
+message Project {
+  string id = 1;
+  string name = 2;
+  repeated Workflow workflows = 3;
+}
+
+message Workflow {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string projectId = 4;
+  repeated Task tasks = 5;
 }
 
 message Task {
   string id = 1;
-  TaskState state = 2;
-  string name = 3;
-  repeated Task dependsOn = 4;
-  string projectId = 5;
-  string workflowId = 6;
-}
-
-enum TaskState {
-  STATE_UNSPECIFIED = 0;      // Default value if none specified.
-  ON_HOLD = 1;                // Corresponds to "on hold" in Go.
-  UNDER_CONSTRUCTION = 2;     // Corresponds to "under construction" in Go.
-  FINISHED = 3;               // Corresponds to "finished" in Go.
+  string name = 2;
+  repeated string dependsOn = 3;
+  bool blocked = 4;
+  bool finished = 5;
 }
