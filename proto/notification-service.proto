@@ -66,6 +66,7 @@ message GetAllNotificationsByUserResponse {
 
 message MarkAsReadNotificationRequest {
   string id = 1;
+  string userId = 2;
 }
 
 message MarkAsReadNotificationResponse {
