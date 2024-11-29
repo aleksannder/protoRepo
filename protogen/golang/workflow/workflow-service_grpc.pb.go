@@ -29,7 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WorkflowServiceClient interface {
 	GetWorkflowById(ctx context.Context, in *GetWorkflowByIdRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error)
-	InsertWorkflow(ctx context.Context, in *InsertWorkflowRequest, opts ...grpc.CallOption) (*InsertWorkflowResponse, error)
+	InsertWorkflow(ctx context.Context, in *InsertWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error)
 	GetWorkflowsByProjectId(ctx context.Context, in *GetWorkflowsByProjectIdRequest, opts ...grpc.CallOption) (*GetWorkflowsByProjectIdResponse, error)
 }
 
@@ -51,9 +51,9 @@ func (c *workflowServiceClient) GetWorkflowById(ctx context.Context, in *GetWork
 	return out, nil
 }
 
-func (c *workflowServiceClient) InsertWorkflow(ctx context.Context, in *InsertWorkflowRequest, opts ...grpc.CallOption) (*InsertWorkflowResponse, error) {
+func (c *workflowServiceClient) InsertWorkflow(ctx context.Context, in *InsertWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(InsertWorkflowResponse)
+	out := new(GetWorkflowByIdResponse)
 	err := c.cc.Invoke(ctx, WorkflowService_InsertWorkflow_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -76,7 +76,7 @@ func (c *workflowServiceClient) GetWorkflowsByProjectId(ctx context.Context, in 
 // for forward compatibility.
 type WorkflowServiceServer interface {
 	GetWorkflowById(context.Context, *GetWorkflowByIdRequest) (*GetWorkflowByIdResponse, error)
-	InsertWorkflow(context.Context, *InsertWorkflowRequest) (*InsertWorkflowResponse, error)
+	InsertWorkflow(context.Context, *InsertWorkflowRequest) (*GetWorkflowByIdResponse, error)
 	GetWorkflowsByProjectId(context.Context, *GetWorkflowsByProjectIdRequest) (*GetWorkflowsByProjectIdResponse, error)
 	mustEmbedUnimplementedWorkflowServiceServer()
 }
@@ -91,7 +91,7 @@ type UnimplementedWorkflowServiceServer struct{}
 func (UnimplementedWorkflowServiceServer) GetWorkflowById(context.Context, *GetWorkflowByIdRequest) (*GetWorkflowByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWorkflowById not implemented")
 }
-func (UnimplementedWorkflowServiceServer) InsertWorkflow(context.Context, *InsertWorkflowRequest) (*InsertWorkflowResponse, error) {
+func (UnimplementedWorkflowServiceServer) InsertWorkflow(context.Context, *InsertWorkflowRequest) (*GetWorkflowByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InsertWorkflow not implemented")
 }
 func (UnimplementedWorkflowServiceServer) GetWorkflowsByProjectId(context.Context, *GetWorkflowsByProjectIdRequest) (*GetWorkflowsByProjectIdResponse, error) {

@@ -13,7 +13,7 @@ service WorkflowService {
     };
   }
 
-  rpc InsertWorkflow(InsertWorkflowRequest) returns (InsertWorkflowResponse) {
+  rpc InsertWorkflow(InsertWorkflowRequest) returns (GetWorkflowByIdResponse) {
     option (google.api.http) = {
       post: "/v1/workflows"
       body: "*"
@@ -44,12 +44,9 @@ message GetWorkflowsByProjectIdResponse {
 }
 
 message InsertWorkflowRequest {
-  Workflow project = 1;
+  Workflow workflow = 1;
 }
 
-message InsertWorkflowResponse {
-  Workflow response = 1;
-}
 
 message Workflow {
   string id = 1;
