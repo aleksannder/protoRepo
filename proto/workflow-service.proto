@@ -25,6 +25,32 @@ service WorkflowService {
       get: "/v1/workflows/projects/{projectId}"
     };
   }
+
+  rpc UpdateTaskStatus(UpdateTaskRequest) returns (SuccessResponse) {
+    option (google.api.http) = {
+      patch: "/v1/workflows/{workflowId}/tasks/{taskId}"
+      body: "*"
+    };
+  }
+
+  rpc UpdateWorkflow(UpdateWorkflowRequest) returns (GetWorkflowByIdResponse) {
+    option (google.api.http) = {
+      patch: "/v1/workflows/{workflowId}"
+      body: "*"
+    };
+  }
+
+  rpc DeleteWorkflow(DeleteWorkflowRequest) returns (SuccessResponse) {
+    option (google.api.http) = {
+      delete: "/v1/workflows/{workflowId}"
+    };
+  }
+
+  rpc RemoveTaskFromWorkflow(RemoveTaskFromWorkflowRequest) returns (SuccessResponse) {
+    option (google.api.http) = {
+      delete: "/v1/workflows/{workflowId}/tasks/{taskId}"
+    };
+  }
 }
 
 message GetWorkflowByIdRequest {
@@ -47,6 +73,29 @@ message InsertWorkflowRequest {
   Workflow workflow = 1;
 }
 
+message UpdateTaskRequest {
+  string taskId = 1;
+  string workflowId = 2;
+  bool finished = 3;
+}
+
+message UpdateWorkflowRequest {
+  string workflowId = 1;
+  Workflow workflow = 2;
+}
+
+message SuccessResponse {
+  bool success = 1;
+}
+
+message DeleteWorkflowRequest {
+  string workflowId = 1;
+}
+
+message RemoveTaskFromWorkflowRequest {
+  string taskId = 1;
+  string workflowId = 2;
+}
 
 message Workflow {
   string id = 1;
