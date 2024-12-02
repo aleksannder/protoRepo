@@ -26,6 +26,7 @@ const (
 	WorkflowService_UpdateWorkflow_FullMethodName          = "/workflow.WorkflowService/UpdateWorkflow"
 	WorkflowService_DeleteWorkflow_FullMethodName          = "/workflow.WorkflowService/DeleteWorkflow"
 	WorkflowService_RemoveTaskFromWorkflow_FullMethodName  = "/workflow.WorkflowService/RemoveTaskFromWorkflow"
+	WorkflowService_CheckTask_FullMethodName               = "/workflow.WorkflowService/CheckTask"
 )
 
 // WorkflowServiceClient is the client API for WorkflowService service.
@@ -39,6 +40,7 @@ type WorkflowServiceClient interface {
 	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error)
 	DeleteWorkflow(ctx context.Context, in *DeleteWorkflowRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	RemoveTaskFromWorkflow(ctx context.Context, in *RemoveTaskFromWorkflowRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	CheckTask(ctx context.Context, in *CheckTaskRequest, opts ...grpc.CallOption) (*CheckTaskResponse, error)
 }
 
 type workflowServiceClient struct {
@@ -119,6 +121,16 @@ func (c *workflowServiceClient) RemoveTaskFromWorkflow(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *workflowServiceClient) CheckTask(ctx context.Context, in *CheckTaskRequest, opts ...grpc.CallOption) (*CheckTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckTaskResponse)
+	err := c.cc.Invoke(ctx, WorkflowService_CheckTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkflowServiceServer is the server API for WorkflowService service.
 // All implementations must embed UnimplementedWorkflowServiceServer
 // for forward compatibility.
@@ -130,6 +142,7 @@ type WorkflowServiceServer interface {
 	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*GetWorkflowByIdResponse, error)
 	DeleteWorkflow(context.Context, *DeleteWorkflowRequest) (*SuccessResponse, error)
 	RemoveTaskFromWorkflow(context.Context, *RemoveTaskFromWorkflowRequest) (*SuccessResponse, error)
+	CheckTask(context.Context, *CheckTaskRequest) (*CheckTaskResponse, error)
 	mustEmbedUnimplementedWorkflowServiceServer()
 }
 
@@ -160,6 +173,9 @@ func (UnimplementedWorkflowServiceServer) DeleteWorkflow(context.Context, *Delet
 }
 func (UnimplementedWorkflowServiceServer) RemoveTaskFromWorkflow(context.Context, *RemoveTaskFromWorkflowRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveTaskFromWorkflow not implemented")
+}
+func (UnimplementedWorkflowServiceServer) CheckTask(context.Context, *CheckTaskRequest) (*CheckTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckTask not implemented")
 }
 func (UnimplementedWorkflowServiceServer) mustEmbedUnimplementedWorkflowServiceServer() {}
 func (UnimplementedWorkflowServiceServer) testEmbeddedByValue()                         {}
@@ -308,6 +324,24 @@ func _WorkflowService_RemoveTaskFromWorkflow_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowService_CheckTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowServiceServer).CheckTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowService_CheckTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowServiceServer).CheckTask(ctx, req.(*CheckTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WorkflowService_ServiceDesc is the grpc.ServiceDesc for WorkflowService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -342,6 +376,10 @@ var WorkflowService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveTaskFromWorkflow",
 			Handler:    _WorkflowService_RemoveTaskFromWorkflow_Handler,
+		},
+		{
+			MethodName: "CheckTask",
+			Handler:    _WorkflowService_CheckTask_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
