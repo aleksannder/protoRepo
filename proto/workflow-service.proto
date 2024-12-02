@@ -51,6 +51,12 @@ service WorkflowService {
       delete: "/v1/workflows/{workflowId}/tasks/{taskId}"
     };
   }
+
+  rpc CheckTask(CheckTaskRequest) returns (CheckTaskResponse) {
+    option (google.api.http) = {
+      get: "/v1/workflows/tasks/{taskId}"
+    };
+  }
 }
 
 message GetWorkflowByIdRequest {
@@ -95,6 +101,15 @@ message DeleteWorkflowRequest {
 message RemoveTaskFromWorkflowRequest {
   string taskId = 1;
   string workflowId = 2;
+}
+
+message CheckTaskRequest {
+  string taskId = 1;
+}
+
+message CheckTaskResponse {
+  bool finished = 1;
+  bool blocked = 2;
 }
 
 message Workflow {
