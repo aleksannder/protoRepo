@@ -47,7 +47,6 @@ message CreateActivityRequest {
   string activityDoType = 3;
   string activityDoneType = 4;
 }
-
 message CreateActivityResponse {
   Activity activity = 1;
 }
