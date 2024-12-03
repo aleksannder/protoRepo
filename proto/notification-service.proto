@@ -5,6 +5,8 @@ package notification;
 option go_package = "proto/notification";
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
 
 
 service NotificationService {
@@ -28,6 +30,17 @@ service NotificationService {
     option (google.api.http) = {
       patch: "/v1/notifications/{id}/users/{userId}"
       body: "*"
+    };
+  }
+  rpc CreateActivity(CreateActivityRequest) returns (CreateActivityResponse) {
+    option (google.api.http) = {
+      post: "/v1/notifications/activities"
+      body: "*"
+    };
+  }
+  rpc GetAllActivitiesByManagerId(GetAllActivitiesByManagerIdRequest) returns (GetAllActivitiesByManagerIdResponse) {
+    option (google.api.http) = {
+      get: "/v1/notifications/activities/{managerId}"
     };
   }
 }
@@ -71,4 +84,43 @@ message MarkAsReadNotificationRequest {
 
 message MarkAsReadNotificationResponse {
   bool success = 1;
+}
+
+
+enum ActivityDoType {
+  ADD_MEMBER_TO_PROJECT = 0;
+  REMOVE_MEMBER_FROM_PROJECT = 1;
+  ASSIGN_TO_TASK = 2;
+  UNASSIGN_FROM_TASK = 3;
+  CREATE_TASK = 4;       
+  CHANGE_TASK_STATE = 5;         
+  DELETE_TASK = 6;    
+  ADD_DOCUMENT = 7;           
+}
+
+message Activity {
+  string id = 1; 
+  string managerId= 2;
+  string username = 3; 
+  ActivityDoType activityDoType = 4;
+  string activityDoneType = 5;
+  google.protobuf.Timestamp createdAt = 6;
+}
+
+message CreateActivityRequest {
+  string managerId = 1;
+  string username = 2; 
+  string activityDoType = 3;
+  string activityDoneType = 4;
+}
+message CreateActivityResponse {
+  Activity activity = 1;
+}
+
+message GetAllActivitiesByManagerIdRequest {
+  string managerId = 1;
+}
+
+message GetAllActivitiesByManagerIdResponse {
+  repeated Activity activities = 1;
 }
