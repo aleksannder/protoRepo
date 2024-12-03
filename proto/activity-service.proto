@@ -25,10 +25,11 @@ enum ActivityDoType {
   ADD_MEMBER_TO_PROJECT = 0;
   REMOVE_MEMBER_FROM_PROJECT = 1;
   ASSIGN_TO_TASK = 2;
-  CREATE_TASK = 3;       
-  CHANGE_TASK_STATE = 4;         
-  DELETE_TASK = 5;    
-  ADD_DOCUMENT = 6;           
+  UNASSIGN_FROM_TASK = 3;
+  CREATE_TASK = 4;       
+  CHANGE_TASK_STATE = 5;         
+  DELETE_TASK = 6;    
+  ADD_DOCUMENT = 7;           
 }
 
 message Activity {
