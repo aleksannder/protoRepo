@@ -28,7 +28,7 @@ service WorkflowService {
 
   rpc UpdateTaskStatus(UpdateTaskRequest) returns (SuccessResponse) {
     option (google.api.http) = {
-      patch: "/v1/workflows/{workflowId}/tasks/{taskId}"
+      patch: "/v1/workflows/tasks/{taskId}"
       body: "*"
     };
   }
@@ -81,8 +81,7 @@ message InsertWorkflowRequest {
 
 message UpdateTaskRequest {
   string taskId = 1;
-  string workflowId = 2;
-  bool finished = 3;
+  bool finished = 2;
 }
 
 message UpdateWorkflowRequest {

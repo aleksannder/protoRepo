@@ -176,16 +176,6 @@ func request_WorkflowService_UpdateTaskStatus_0(ctx context.Context, marshaler r
 		_   = err
 	)
 
-	val, ok = pathParams["workflowId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "workflowId")
-	}
-
-	protoReq.WorkflowId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "workflowId", err)
-	}
-
 	val, ok = pathParams["taskId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "taskId")
@@ -215,16 +205,6 @@ func local_request_WorkflowService_UpdateTaskStatus_0(ctx context.Context, marsh
 		err error
 		_   = err
 	)
-
-	val, ok = pathParams["workflowId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "workflowId")
-	}
-
-	protoReq.WorkflowId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "workflowId", err)
-	}
 
 	val, ok = pathParams["taskId"]
 	if !ok {
@@ -567,7 +547,7 @@ func RegisterWorkflowServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/workflow.WorkflowService/UpdateTaskStatus", runtime.WithHTTPPathPattern("/v1/workflows/{workflowId}/tasks/{taskId}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/workflow.WorkflowService/UpdateTaskStatus", runtime.WithHTTPPathPattern("/v1/workflows/tasks/{taskId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -797,7 +777,7 @@ func RegisterWorkflowServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/workflow.WorkflowService/UpdateTaskStatus", runtime.WithHTTPPathPattern("/v1/workflows/{workflowId}/tasks/{taskId}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/workflow.WorkflowService/UpdateTaskStatus", runtime.WithHTTPPathPattern("/v1/workflows/tasks/{taskId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -911,7 +891,7 @@ var (
 
 	pattern_WorkflowService_GetWorkflowsByProjectId_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "workflows", "projects", "projectId"}, ""))
 
-	pattern_WorkflowService_UpdateTaskStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "workflows", "workflowId", "tasks", "taskId"}, ""))
+	pattern_WorkflowService_UpdateTaskStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "workflows", "tasks", "taskId"}, ""))
 
 	pattern_WorkflowService_UpdateWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "workflows", "workflowId"}, ""))
 
