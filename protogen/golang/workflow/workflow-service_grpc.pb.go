@@ -19,12 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	WorkflowService_GetWorkflowById_FullMethodName         = "/workflow.WorkflowService/GetWorkflowById"
 	WorkflowService_InsertWorkflow_FullMethodName          = "/workflow.WorkflowService/InsertWorkflow"
 	WorkflowService_GetWorkflowsByProjectId_FullMethodName = "/workflow.WorkflowService/GetWorkflowsByProjectId"
 	WorkflowService_UpdateTaskStatus_FullMethodName        = "/workflow.WorkflowService/UpdateTaskStatus"
-	WorkflowService_UpdateWorkflow_FullMethodName          = "/workflow.WorkflowService/UpdateWorkflow"
-	WorkflowService_DeleteWorkflow_FullMethodName          = "/workflow.WorkflowService/DeleteWorkflow"
 	WorkflowService_RemoveTaskFromWorkflow_FullMethodName  = "/workflow.WorkflowService/RemoveTaskFromWorkflow"
 	WorkflowService_CheckTask_FullMethodName               = "/workflow.WorkflowService/CheckTask"
 )
@@ -33,12 +30,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WorkflowServiceClient interface {
-	GetWorkflowById(ctx context.Context, in *GetWorkflowByIdRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error)
 	InsertWorkflow(ctx context.Context, in *InsertWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error)
 	GetWorkflowsByProjectId(ctx context.Context, in *GetWorkflowsByProjectIdRequest, opts ...grpc.CallOption) (*GetWorkflowsByProjectIdResponse, error)
 	UpdateTaskStatus(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
-	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error)
-	DeleteWorkflow(ctx context.Context, in *DeleteWorkflowRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	RemoveTaskFromWorkflow(ctx context.Context, in *RemoveTaskFromWorkflowRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	CheckTask(ctx context.Context, in *CheckTaskRequest, opts ...grpc.CallOption) (*CheckTaskResponse, error)
 }
@@ -49,16 +43,6 @@ type workflowServiceClient struct {
 
 func NewWorkflowServiceClient(cc grpc.ClientConnInterface) WorkflowServiceClient {
 	return &workflowServiceClient{cc}
-}
-
-func (c *workflowServiceClient) GetWorkflowById(ctx context.Context, in *GetWorkflowByIdRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetWorkflowByIdResponse)
-	err := c.cc.Invoke(ctx, WorkflowService_GetWorkflowById_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *workflowServiceClient) InsertWorkflow(ctx context.Context, in *InsertWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error) {
@@ -91,26 +75,6 @@ func (c *workflowServiceClient) UpdateTaskStatus(ctx context.Context, in *Update
 	return out, nil
 }
 
-func (c *workflowServiceClient) UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowByIdResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetWorkflowByIdResponse)
-	err := c.cc.Invoke(ctx, WorkflowService_UpdateWorkflow_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *workflowServiceClient) DeleteWorkflow(ctx context.Context, in *DeleteWorkflowRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SuccessResponse)
-	err := c.cc.Invoke(ctx, WorkflowService_DeleteWorkflow_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *workflowServiceClient) RemoveTaskFromWorkflow(ctx context.Context, in *RemoveTaskFromWorkflowRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SuccessResponse)
@@ -135,12 +99,9 @@ func (c *workflowServiceClient) CheckTask(ctx context.Context, in *CheckTaskRequ
 // All implementations must embed UnimplementedWorkflowServiceServer
 // for forward compatibility.
 type WorkflowServiceServer interface {
-	GetWorkflowById(context.Context, *GetWorkflowByIdRequest) (*GetWorkflowByIdResponse, error)
 	InsertWorkflow(context.Context, *InsertWorkflowRequest) (*GetWorkflowByIdResponse, error)
 	GetWorkflowsByProjectId(context.Context, *GetWorkflowsByProjectIdRequest) (*GetWorkflowsByProjectIdResponse, error)
 	UpdateTaskStatus(context.Context, *UpdateTaskRequest) (*SuccessResponse, error)
-	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*GetWorkflowByIdResponse, error)
-	DeleteWorkflow(context.Context, *DeleteWorkflowRequest) (*SuccessResponse, error)
 	RemoveTaskFromWorkflow(context.Context, *RemoveTaskFromWorkflowRequest) (*SuccessResponse, error)
 	CheckTask(context.Context, *CheckTaskRequest) (*CheckTaskResponse, error)
 	mustEmbedUnimplementedWorkflowServiceServer()
@@ -153,9 +114,6 @@ type WorkflowServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedWorkflowServiceServer struct{}
 
-func (UnimplementedWorkflowServiceServer) GetWorkflowById(context.Context, *GetWorkflowByIdRequest) (*GetWorkflowByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetWorkflowById not implemented")
-}
 func (UnimplementedWorkflowServiceServer) InsertWorkflow(context.Context, *InsertWorkflowRequest) (*GetWorkflowByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InsertWorkflow not implemented")
 }
@@ -164,12 +122,6 @@ func (UnimplementedWorkflowServiceServer) GetWorkflowsByProjectId(context.Contex
 }
 func (UnimplementedWorkflowServiceServer) UpdateTaskStatus(context.Context, *UpdateTaskRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaskStatus not implemented")
-}
-func (UnimplementedWorkflowServiceServer) UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*GetWorkflowByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateWorkflow not implemented")
-}
-func (UnimplementedWorkflowServiceServer) DeleteWorkflow(context.Context, *DeleteWorkflowRequest) (*SuccessResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteWorkflow not implemented")
 }
 func (UnimplementedWorkflowServiceServer) RemoveTaskFromWorkflow(context.Context, *RemoveTaskFromWorkflowRequest) (*SuccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveTaskFromWorkflow not implemented")
@@ -196,24 +148,6 @@ func RegisterWorkflowServiceServer(s grpc.ServiceRegistrar, srv WorkflowServiceS
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&WorkflowService_ServiceDesc, srv)
-}
-
-func _WorkflowService_GetWorkflowById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetWorkflowByIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowServiceServer).GetWorkflowById(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowService_GetWorkflowById_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowServiceServer).GetWorkflowById(ctx, req.(*GetWorkflowByIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _WorkflowService_InsertWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -270,42 +204,6 @@ func _WorkflowService_UpdateTaskStatus_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkflowService_UpdateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateWorkflowRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowServiceServer).UpdateWorkflow(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowService_UpdateWorkflow_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowServiceServer).UpdateWorkflow(ctx, req.(*UpdateWorkflowRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _WorkflowService_DeleteWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteWorkflowRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WorkflowServiceServer).DeleteWorkflow(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: WorkflowService_DeleteWorkflow_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkflowServiceServer).DeleteWorkflow(ctx, req.(*DeleteWorkflowRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _WorkflowService_RemoveTaskFromWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RemoveTaskFromWorkflowRequest)
 	if err := dec(in); err != nil {
@@ -350,10 +248,6 @@ var WorkflowService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*WorkflowServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetWorkflowById",
-			Handler:    _WorkflowService_GetWorkflowById_Handler,
-		},
-		{
 			MethodName: "InsertWorkflow",
 			Handler:    _WorkflowService_InsertWorkflow_Handler,
 		},
@@ -364,14 +258,6 @@ var WorkflowService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateTaskStatus",
 			Handler:    _WorkflowService_UpdateTaskStatus_Handler,
-		},
-		{
-			MethodName: "UpdateWorkflow",
-			Handler:    _WorkflowService_UpdateWorkflow_Handler,
-		},
-		{
-			MethodName: "DeleteWorkflow",
-			Handler:    _WorkflowService_DeleteWorkflow_Handler,
 		},
 		{
 			MethodName: "RemoveTaskFromWorkflow",

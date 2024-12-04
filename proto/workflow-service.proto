@@ -7,11 +7,6 @@ option go_package = "proto/workflow";
 import "google/api/annotations.proto";
 
 service WorkflowService {
-  rpc GetWorkflowById(GetWorkflowByIdRequest) returns (GetWorkflowByIdResponse) {
-    option (google.api.http) = {
-      get: "/v1/workflows/{workflowId}"
-    };
-  }
 
   rpc InsertWorkflow(InsertWorkflowRequest) returns (GetWorkflowByIdResponse) {
     option (google.api.http) = {
@@ -33,22 +28,10 @@ service WorkflowService {
     };
   }
 
-  rpc UpdateWorkflow(UpdateWorkflowRequest) returns (GetWorkflowByIdResponse) {
-    option (google.api.http) = {
-      patch: "/v1/workflows/{workflowId}"
-      body: "*"
-    };
-  }
-
-  rpc DeleteWorkflow(DeleteWorkflowRequest) returns (SuccessResponse) {
-    option (google.api.http) = {
-      delete: "/v1/workflows/{workflowId}"
-    };
-  }
 
   rpc RemoveTaskFromWorkflow(RemoveTaskFromWorkflowRequest) returns (SuccessResponse) {
     option (google.api.http) = {
-      delete: "/v1/workflows/{workflowId}/tasks/{taskId}"
+      delete: "/v1/workflows/tasks/{taskId}"
     };
   }
 
@@ -59,9 +42,6 @@ service WorkflowService {
   }
 }
 
-message GetWorkflowByIdRequest {
-  string workflowId = 1;
-}
 
 message GetWorkflowByIdResponse {
   Workflow response = 1;
@@ -84,22 +64,14 @@ message UpdateTaskRequest {
   bool finished = 2;
 }
 
-message UpdateWorkflowRequest {
-  string workflowId = 1;
-  Workflow workflow = 2;
-}
 
 message SuccessResponse {
   bool success = 1;
 }
 
-message DeleteWorkflowRequest {
-  string workflowId = 1;
-}
 
 message RemoveTaskFromWorkflowRequest {
   string taskId = 1;
-  string workflowId = 2;
 }
 
 message CheckTaskRequest {
@@ -112,9 +84,6 @@ message CheckTaskResponse {
 }
 
 message Workflow {
-  string id = 1;
-  string name = 2;
-  string description = 3;
   string projectId = 4;
   repeated Task tasks = 5;
 }
