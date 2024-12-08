@@ -5,6 +5,7 @@ package task;
 option go_package = "proto/task";
 
 import "google/api/annotations.proto";
+import "google/api/httpbody.proto";
 
 service TaskService {
   rpc InsertTask(InsertTaskRequest) returns (InsertTaskResponse) {
@@ -38,6 +39,17 @@ service TaskService {
     option (google.api.http) = {
       patch: "/v1/tasks/{taskId}/update"
       body: "*"
+    };
+  }
+  rpc DocumentUpload(stream google.api.HttpBody) returns (UploadResponse) {
+    option (google.api.http) = {
+      post: "/v1/tasks/upload",
+      body: "*"
+    };
+  }
+  rpc DocumentDownload(DownloadDocumentRequest) returns (stream google.api.HttpBody) {
+    option (google.api.http) = {
+      get: "/v1/tasks/{taskId}/download"
     };
   }
 }
@@ -124,4 +136,14 @@ message UpdateTaskResponse {
   TaskState state = 3;
   string description = 4;
   repeated User users = 5;
+}
+
+message UploadResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message DownloadDocumentRequest {
+  string taskId = 1;
+  string fileName = 2;
 }
