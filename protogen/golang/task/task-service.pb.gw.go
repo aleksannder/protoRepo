@@ -344,10 +344,6 @@ func request_TaskService_DocumentUpload_0(ctx context.Context, marshaler runtime
 
 }
 
-var (
-	filter_TaskService_DocumentDownload_0 = &utilities.DoubleArray{Encoding: map[string]int{"taskId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
-)
-
 func request_TaskService_DocumentDownload_0(ctx context.Context, marshaler runtime.Marshaler, client TaskServiceClient, req *http.Request, pathParams map[string]string) (TaskService_DocumentDownloadClient, runtime.ServerMetadata, error) {
 	var protoReq DownloadDocumentRequest
 	var metadata runtime.ServerMetadata
@@ -369,11 +365,14 @@ func request_TaskService_DocumentDownload_0(ctx context.Context, marshaler runti
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "taskId", err)
 	}
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	val, ok = pathParams["fileName"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fileName")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_TaskService_DocumentDownload_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.FileName, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fileName", err)
 	}
 
 	stream, err := client.DocumentDownload(ctx, &protoReq)
@@ -761,7 +760,7 @@ func RegisterTaskServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/task.TaskService/DocumentDownload", runtime.WithHTTPPathPattern("/v1/tasks/{taskId}/download"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/task.TaskService/DocumentDownload", runtime.WithHTTPPathPattern("/v1/tasks/{taskId}/documents/{fileName}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -795,7 +794,7 @@ var (
 
 	pattern_TaskService_DocumentUpload_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "tasks", "upload"}, ""))
 
-	pattern_TaskService_DocumentDownload_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "tasks", "taskId", "download"}, ""))
+	pattern_TaskService_DocumentDownload_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "tasks", "taskId", "documents", "fileName"}, ""))
 )
 
 var (

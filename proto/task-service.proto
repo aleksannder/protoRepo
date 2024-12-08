@@ -49,7 +49,7 @@ service TaskService {
   }
   rpc DocumentDownload(DownloadDocumentRequest) returns (stream google.api.HttpBody) {
     option (google.api.http) = {
-      get: "/v1/tasks/{taskId}/download"
+      get: "/v1/tasks/{taskId}/documents/{fileName}"
     };
   }
 }
