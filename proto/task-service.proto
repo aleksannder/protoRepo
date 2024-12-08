@@ -83,7 +83,7 @@ message InsertTaskRequest {
   string name = 3;
   string description = 4;
   string projectId = 5;
-  repeated User users = 6;   // Dodata lista korisnika
+  repeated User users = 6;
 }
 
 message ChangeTaskStateRequest {
@@ -101,7 +101,8 @@ message FindTaskByIdResponse {
   string name = 3;
   string description = 4;
   string projectId = 5;
-  repeated User users = 6;   // Dodata lista korisnika
+  repeated User users = 6;
+  repeated string documents = 7;
 }
 
 message FindAllTasksRequest {}
