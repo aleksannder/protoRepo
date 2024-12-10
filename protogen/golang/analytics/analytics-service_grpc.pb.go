@@ -30,7 +30,6 @@ const (
 	AnalyticsService_GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus_FullMethodName      = "/analytics.AnalyticsService/GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus"
 	AnalyticsService_InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus_FullMethodName   = "/analytics.AnalyticsService/InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus"
 	AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_FullMethodName = "/analytics.AnalyticsService/IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus"
-	AnalyticsService_DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_FullMethodName = "/analytics.AnalyticsService/DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus"
 	AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_FullMethodName     = "/analytics.AnalyticsService/GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
 	AnalyticsService_InsertAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_FullMethodName  = "/analytics.AnalyticsService/InsertAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
 	AnalyticsService_RemoveAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_FullMethodName  = "/analytics.AnalyticsService/RemoveAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
@@ -56,7 +55,6 @@ type AnalyticsServiceClient interface {
 	GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse, error)
 	InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
 	IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
-	DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
 	// 4. ANALYTICS FOR EACH USER ON WHICH TASKS IS HE CURRENTLY ON METHODS - GET, INSERT, REMOVE
 	GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(ctx context.Context, in *AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest, opts ...grpc.CallOption) (*AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse, error)
 	InsertAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(ctx context.Context, in *AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest, opts ...grpc.CallOption) (*AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse, error)
@@ -184,16 +182,6 @@ func (c *analyticsServiceClient) IncreaseAnalyticsForEachTaskHowMuchTimeWasInEac
 	return out, nil
 }
 
-func (c *analyticsServiceClient) DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse)
-	err := c.cc.Invoke(ctx, AnalyticsService_DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *analyticsServiceClient) GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(ctx context.Context, in *AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest, opts ...grpc.CallOption) (*AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse)
@@ -262,7 +250,6 @@ type AnalyticsServiceServer interface {
 	GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse, error)
 	InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
 	IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
-	DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
 	// 4. ANALYTICS FOR EACH USER ON WHICH TASKS IS HE CURRENTLY ON METHODS - GET, INSERT, REMOVE
 	GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(context.Context, *AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) (*AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse, error)
 	InsertAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(context.Context, *AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) (*AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse, error)
@@ -312,9 +299,6 @@ func (UnimplementedAnalyticsServiceServer) InsertAnalyticsForEachTaskHowMuchTime
 }
 func (UnimplementedAnalyticsServiceServer) IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus not implemented")
-}
-func (UnimplementedAnalyticsServiceServer) DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus not implemented")
 }
 func (UnimplementedAnalyticsServiceServer) GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(context.Context, *AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) (*AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn not implemented")
@@ -550,24 +534,6 @@ func _AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_Ha
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AnalyticsService_DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AnalyticsServiceServer).DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AnalyticsService_DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalyticsServiceServer).DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx, req.(*AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest)
 	if err := dec(in); err != nil {
@@ -708,10 +674,6 @@ var AnalyticsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus",
 			Handler:    _AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_Handler,
-		},
-		{
-			MethodName: "DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus",
-			Handler:    _AnalyticsService_DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_Handler,
 		},
 		{
 			MethodName: "GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn",
