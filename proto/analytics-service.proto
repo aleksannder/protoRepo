@@ -59,7 +59,7 @@ service AnalyticsService {
     }
 
     // 3. ANALYTICS FOR EACH TASK HOW MUCH TIME WAS IN EACH STATUS METHODS - GET, INSERT, INCREASE AND DECREASE
-    rpc GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
+    rpc GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse) {
         option (google.api.http) = {
             get: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"
         };
@@ -157,6 +157,10 @@ message AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse {
     string taskStatus = 4;
     google.protobuf.Timestamp statusStartTime = 5;
     google.protobuf.Timestamp statusEndTime = 6;
+}
+
+message AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse {
+    repeated AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse responses = 1;
 }
 
 message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest {

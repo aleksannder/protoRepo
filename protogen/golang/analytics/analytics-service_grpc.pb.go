@@ -53,7 +53,7 @@ type AnalyticsServiceClient interface {
 	IncreaseAnalyticsNumberOfTasksByStatusTaskCount(ctx context.Context, in *AnalyticsNumberOfTasksByStatusRequest, opts ...grpc.CallOption) (*AnalyticsNumberOfTasksByStatusResponse, error)
 	DecreaseAnalyticsNumberOfTasksByStatusTaskCount(ctx context.Context, in *AnalyticsNumberOfTasksByStatusRequest, opts ...grpc.CallOption) (*AnalyticsNumberOfTasksByStatusResponse, error)
 	// 3. ANALYTICS FOR EACH TASK HOW MUCH TIME WAS IN EACH STATUS METHODS - GET, INSERT, INCREASE AND DECREASE
-	GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
+	GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse, error)
 	InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
 	IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
 	DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
@@ -154,9 +154,9 @@ func (c *analyticsServiceClient) DecreaseAnalyticsNumberOfTasksByStatusTaskCount
 	return out, nil
 }
 
-func (c *analyticsServiceClient) GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error) {
+func (c *analyticsServiceClient) GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx context.Context, in *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest, opts ...grpc.CallOption) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse)
+	out := new(AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse)
 	err := c.cc.Invoke(ctx, AnalyticsService_GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -259,7 +259,7 @@ type AnalyticsServiceServer interface {
 	IncreaseAnalyticsNumberOfTasksByStatusTaskCount(context.Context, *AnalyticsNumberOfTasksByStatusRequest) (*AnalyticsNumberOfTasksByStatusResponse, error)
 	DecreaseAnalyticsNumberOfTasksByStatusTaskCount(context.Context, *AnalyticsNumberOfTasksByStatusRequest) (*AnalyticsNumberOfTasksByStatusResponse, error)
 	// 3. ANALYTICS FOR EACH TASK HOW MUCH TIME WAS IN EACH STATUS METHODS - GET, INSERT, INCREASE AND DECREASE
-	GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
+	GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse, error)
 	InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
 	IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
 	DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error)
@@ -304,7 +304,7 @@ func (UnimplementedAnalyticsServiceServer) IncreaseAnalyticsNumberOfTasksByStatu
 func (UnimplementedAnalyticsServiceServer) DecreaseAnalyticsNumberOfTasksByStatusTaskCount(context.Context, *AnalyticsNumberOfTasksByStatusRequest) (*AnalyticsNumberOfTasksByStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DecreaseAnalyticsNumberOfTasksByStatusTaskCount not implemented")
 }
-func (UnimplementedAnalyticsServiceServer) GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error) {
+func (UnimplementedAnalyticsServiceServer) GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus not implemented")
 }
 func (UnimplementedAnalyticsServiceServer) InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus(context.Context, *AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) (*AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse, error) {
