@@ -1,0 +1,186 @@
+syntax = "proto3";
+
+package analytics;
+
+option go_package = "proto/analytics";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+service AnalyticsService {
+    // 1. ANALYTICS NUMBER OF TASKS METHODS - GET, INSERT, INCREASE AND DECREASE
+    rpc GetAnalyticsNumberOfTasks(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
+        option (google.api.http) = {
+            get: "/v1/analytics/analyticsNumberOfTasks"
+        };
+    }
+    rpc InsertAnalyticsNumberOfTasks(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
+        option (google.api.http) = {
+            post: "/v1/analytics/analyticsNumberOfTasks"
+            body: "*"
+        };
+    }
+    rpc IncreaseAnalyticsNumberOfTasksTaskCount(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
+        option (google.api.http) = {
+            put: "/v1/analytics/analyticsNumberOfTasks/increase"
+            body: "*"
+        };
+    }
+    rpc DecreaseAnalyticsNumberOfTasksTaskCount(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
+        option (google.api.http) = {
+            put: "/v1/analytics/analyticsNumberOfTasks/decrease"
+            body: "*"
+        };
+    }
+
+    // 2. ANALYTICS NUMBER OF TASKS BY TASK STATUS METHODS - GET, INSERT, INCREASE AND DECREASE
+    rpc GetAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
+        option (google.api.http) = {
+            get: "/v1/analytics/analyticsNumberOfTasksTaskCount"
+        };
+    }
+    rpc InsertAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
+        option (google.api.http) = {
+            post: "/v1/analytics/analyticsNumberOfTasksTaskCount"
+            body: "*"
+        };
+    }
+    rpc IncreaseAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
+        option (google.api.http) = {
+            put: "/v1/analytics/analyticsNumberOfTasksTaskCount/increase"
+            body: "*"
+        };
+    }
+    rpc DecreaseAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
+        option (google.api.http) = {
+            put: "/v1/analytics/analyticsNumberOfTasksTaskCount/decrease"
+            body: "*"
+        };
+    }
+
+    // 3. ANALYTICS FOR EACH TASK HOW MUCH TIME WAS IN EACH STATUS METHODS - GET, INSERT, INCREASE AND DECREASE
+    rpc GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
+        option (google.api.http) = {
+            get: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"
+        };
+    }
+    rpc InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
+        option (google.api.http) = {
+            post: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"
+            body: "*"
+        };
+    }
+    rpc IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
+        option (google.api.http) = {
+            put: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest/increase"
+            body: "*"
+        };
+    }
+    rpc DecreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
+        option (google.api.http) = {
+            put: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest/decrease"
+            body: "*"
+        };
+    }
+
+    // 4. ANALYTICS FOR EACH USER ON WHICH TASKS IS HE CURRENTLY ON METHODS - GET, INSERT, REMOVE
+    rpc GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse) {
+        option (google.api.http) = {
+            get: "/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
+        };
+    }
+    rpc InsertAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse) {
+        option (google.api.http) = {
+            post: "/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
+            body: "*"    
+        };
+    }
+    rpc RemoveAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse) {
+        option (google.api.http) = {
+            delete: "/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
+        };
+    }
+
+    // 5. ANALYTICS IS PROJECT FINISHED BY DEADLINE METHODS - GET, INSERT
+    rpc InsertAnalyticsIsProjectFinishedByDeadline(AnalyticsIsProjectFinishedByDeadlineRequest) returns (AnalyticsIsProjectFinishedByDeadlineResponse) {
+        option (google.api.http) = {
+            post: "/v1/analytics/analyticsIsProjectFinishedByDeadline"
+            body: "*"
+        };
+    }
+    rpc IsProjectFinishedByDeadline(AnalyticsIsProjectFinishedByDeadlineRequest) returns (AnalyticsIsProjectFinishedByDeadlineResponse) {
+        option (google.api.http) = {
+            get: "/v1/analytics/analyticsIsProjectFinishedByDeadline"
+        };
+    }
+
+}
+
+
+message AnalyticsNumberOfTasksRequest {
+    string projectId = 1;
+    string userId = 2;
+}
+
+message AnalyticsNumberOfTasksResponse {
+    string projectId = 1;
+    string userId = 2;
+    int32 taskCount = 3;
+}
+
+message AnalyticsNumberOfTasksByStatusRequest {
+    string projectId = 1;
+    string userId = 2;
+    string taskStatus = 3;
+}
+
+message AnalyticsNumberOfTasksByStatusResponse {
+    string projectId = 1;
+    string userId = 2;
+    int32 taskCount = 3;
+    string taskStatus = 4;
+}
+
+message AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest {
+    string projectId = 1;
+    string userId = 2;
+    string taskId = 3;
+    string taskStatus = 4;
+    google.protobuf.Timestamp statusStartTime = 5;
+    google.protobuf.Timestamp statusEndTime = 6;
+}
+
+message AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse {
+    string projectId = 1;
+    string userId = 2;
+    string taskId = 3;
+    string taskStatus = 4;
+    google.protobuf.Timestamp statusStartTime = 5;
+    google.protobuf.Timestamp statusEndTime = 6;
+}
+
+message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest {
+    string projectId = 1;
+    string userId = 2;
+    string taskId = 3;
+}
+
+message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse {
+    string projectId = 1;
+    string userId = 2;
+    string taskId = 3;
+}
+
+message AnalyticsIsProjectFinishedByDeadlineRequest {
+    string projectId = 1;
+    string userId = 2;
+    google.protobuf.Timestamp deadline = 3;
+    google.protobuf.Timestamp finished = 4;
+}
+
+message AnalyticsIsProjectFinishedByDeadlineResponse {
+    string projectId = 1;
+    string userId = 2;
+    google.protobuf.Timestamp deadline = 3;
+    google.protobuf.Timestamp finished = 4;
+}
