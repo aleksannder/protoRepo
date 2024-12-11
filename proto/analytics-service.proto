@@ -11,7 +11,7 @@ service AnalyticsService {
     // 1. ANALYTICS NUMBER OF TASKS METHODS - GET, INSERT, INCREASE AND DECREASE
     rpc GetAnalyticsNumberOfTasks(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
         option (google.api.http) = {
-            get: "/v1/analytics/analyticsNumberOfTasks"
+            get: "/v1/analytics/analyticsNumberOfTasks/projects/{projectId}/users/{userId}"
         };
     }
     rpc InsertAnalyticsNumberOfTasks(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
@@ -36,7 +36,7 @@ service AnalyticsService {
     // 2. ANALYTICS NUMBER OF TASKS BY TASK STATUS METHODS - GET, INSERT, INCREASE AND DECREASE
     rpc GetAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
         option (google.api.http) = {
-            get: "/v1/analytics/analyticsNumberOfTasksTaskCount"
+            get: "/v1/analytics/analyticsNumberOfTasksTaskCount/projects/{projectId}/users/{userId}/taskStatus/{taskStatus}"
         };
     }
     rpc InsertAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
@@ -61,7 +61,7 @@ service AnalyticsService {
     // 3. ANALYTICS FOR EACH TASK HOW MUCH TIME WAS IN EACH STATUS METHODS - GET, INSERT, INCREASE AND DECREASE
     rpc GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse) {
         option (google.api.http) = {
-            get: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"
+            get: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest/projects/{projectId}/users/{userId}/tasks/{taskId}"
         };
     }
     rpc InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
@@ -80,7 +80,7 @@ service AnalyticsService {
     // 4. ANALYTICS FOR EACH USER ON WHICH TASKS IS HE CURRENTLY ON METHODS - GET, INSERT, REMOVE
     rpc GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (TaskIdsListRespnse) {
         option (google.api.http) = {
-            get: "/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
+            get: "/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn/projects/{projectId}/users/{userId}"
         };
     }
     rpc InsertAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse) {
@@ -98,7 +98,7 @@ service AnalyticsService {
     // 5. ANALYTICS IS PROJECT FINISHED BY DEADLINE METHODS - GET, INSERT
     rpc InsertAnalyticsIsProjectFinishedByDeadline(AnalyticsIsProjectFinishedByDeadlineRequest) returns (AnalyticsIsProjectFinishedByDeadlineResponse) {
         option (google.api.http) = {
-            post: "/v1/analytics/analyticsIsProjectFinishedByDeadline"
+            post: "/v1/analytics/analyticsIsProjectFinishedByDeadline/projects/{projectId}/users/{userId}"
             body: "*"
         };
     }
@@ -160,7 +160,6 @@ message AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse {
 message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest {
     string projectId = 1;
     string userId = 2;
-    string taskId = 3;
 }
 
 message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse {

@@ -31,19 +31,35 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-var (
-	filter_AnalyticsService_GetAnalyticsNumberOfTasks_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
 func request_AnalyticsService_GetAnalyticsNumberOfTasks_0(ctx context.Context, marshaler runtime.Marshaler, client AnalyticsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq AnalyticsNumberOfTasksRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AnalyticsService_GetAnalyticsNumberOfTasks_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
 	}
 
 	msg, err := client.GetAnalyticsNumberOfTasks(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -55,11 +71,31 @@ func local_request_AnalyticsService_GetAnalyticsNumberOfTasks_0(ctx context.Cont
 	var protoReq AnalyticsNumberOfTasksRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AnalyticsService_GetAnalyticsNumberOfTasks_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
 	}
 
 	msg, err := server.GetAnalyticsNumberOfTasks(ctx, &protoReq)
@@ -145,19 +181,45 @@ func local_request_AnalyticsService_DecreaseAnalyticsNumberOfTasksTaskCount_0(ct
 
 }
 
-var (
-	filter_AnalyticsService_GetAnalyticsNumberOfTasksByStatusTaskCount_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
 func request_AnalyticsService_GetAnalyticsNumberOfTasksByStatusTaskCount_0(ctx context.Context, marshaler runtime.Marshaler, client AnalyticsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq AnalyticsNumberOfTasksByStatusRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AnalyticsService_GetAnalyticsNumberOfTasksByStatusTaskCount_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
+	}
+
+	val, ok = pathParams["taskStatus"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "taskStatus")
+	}
+
+	protoReq.TaskStatus, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "taskStatus", err)
 	}
 
 	msg, err := client.GetAnalyticsNumberOfTasksByStatusTaskCount(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -169,11 +231,41 @@ func local_request_AnalyticsService_GetAnalyticsNumberOfTasksByStatusTaskCount_0
 	var protoReq AnalyticsNumberOfTasksByStatusRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AnalyticsService_GetAnalyticsNumberOfTasksByStatusTaskCount_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
+	}
+
+	val, ok = pathParams["taskStatus"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "taskStatus")
+	}
+
+	protoReq.TaskStatus, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "taskStatus", err)
 	}
 
 	msg, err := server.GetAnalyticsNumberOfTasksByStatusTaskCount(ctx, &protoReq)
@@ -260,12 +352,49 @@ func local_request_AnalyticsService_DecreaseAnalyticsNumberOfTasksByStatusTaskCo
 }
 
 var (
-	filter_AnalyticsService_GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_AnalyticsService_GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = &utilities.DoubleArray{Encoding: map[string]int{"projectId": 0, "userId": 1, "taskId": 2}, Base: []int{1, 1, 2, 3, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 3, 4}}
 )
 
 func request_AnalyticsService_GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(ctx context.Context, marshaler runtime.Marshaler, client AnalyticsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest
 	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
+	}
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
+	}
+
+	val, ok = pathParams["taskId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "taskId")
+	}
+
+	protoReq.TaskId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "taskId", err)
+	}
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -282,6 +411,43 @@ func request_AnalyticsService_GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus_
 func local_request_AnalyticsService_GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(ctx context.Context, marshaler runtime.Marshaler, server AnalyticsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest
 	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
+	}
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
+	}
+
+	val, ok = pathParams["taskId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "taskId")
+	}
+
+	protoReq.TaskId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "taskId", err)
+	}
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -347,19 +513,35 @@ func local_request_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEa
 
 }
 
-var (
-	filter_AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
 func request_AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0(ctx context.Context, marshaler runtime.Marshaler, client AnalyticsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
 	}
 
 	msg, err := client.GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -371,11 +553,31 @@ func local_request_AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurre
 	var protoReq AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
 	}
 
 	msg, err := server.GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(ctx, &protoReq)
@@ -453,6 +655,33 @@ func request_AnalyticsService_InsertAnalyticsIsProjectFinishedByDeadline_0(ctx c
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
+	}
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
+	}
+
 	msg, err := client.InsertAnalyticsIsProjectFinishedByDeadline(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -464,6 +693,33 @@ func local_request_AnalyticsService_InsertAnalyticsIsProjectFinishedByDeadline_0
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
+	}
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
 	}
 
 	msg, err := server.InsertAnalyticsIsProjectFinishedByDeadline(ctx, &protoReq)
@@ -522,7 +778,7 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsNumberOfTasks", runtime.WithHTTPPathPattern("/v1/analytics/analyticsNumberOfTasks"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsNumberOfTasks", runtime.WithHTTPPathPattern("/v1/analytics/analyticsNumberOfTasks/projects/{projectId}/users/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -622,7 +878,7 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsNumberOfTasksByStatusTaskCount", runtime.WithHTTPPathPattern("/v1/analytics/analyticsNumberOfTasksTaskCount"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsNumberOfTasksByStatusTaskCount", runtime.WithHTTPPathPattern("/v1/analytics/analyticsNumberOfTasksTaskCount/projects/{projectId}/users/{userId}/taskStatus/{taskStatus}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -722,7 +978,7 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest/projects/{projectId}/users/{userId}/tasks/{taskId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -797,7 +1053,7 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn/projects/{projectId}/users/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -872,7 +1128,7 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/InsertAnalyticsIsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/InsertAnalyticsIsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline/projects/{projectId}/users/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -961,7 +1217,7 @@ func RegisterAnalyticsServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsNumberOfTasks", runtime.WithHTTPPathPattern("/v1/analytics/analyticsNumberOfTasks"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsNumberOfTasks", runtime.WithHTTPPathPattern("/v1/analytics/analyticsNumberOfTasks/projects/{projectId}/users/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1049,7 +1305,7 @@ func RegisterAnalyticsServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsNumberOfTasksByStatusTaskCount", runtime.WithHTTPPathPattern("/v1/analytics/analyticsNumberOfTasksTaskCount"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsNumberOfTasksByStatusTaskCount", runtime.WithHTTPPathPattern("/v1/analytics/analyticsNumberOfTasksTaskCount/projects/{projectId}/users/{userId}/taskStatus/{taskStatus}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1137,7 +1393,7 @@ func RegisterAnalyticsServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest/projects/{projectId}/users/{userId}/tasks/{taskId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1203,7 +1459,7 @@ func RegisterAnalyticsServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn/projects/{projectId}/users/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1269,7 +1525,7 @@ func RegisterAnalyticsServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/InsertAnalyticsIsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/InsertAnalyticsIsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline/projects/{projectId}/users/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1311,7 +1567,7 @@ func RegisterAnalyticsServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 }
 
 var (
-	pattern_AnalyticsService_GetAnalyticsNumberOfTasks_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsNumberOfTasks"}, ""))
+	pattern_AnalyticsService_GetAnalyticsNumberOfTasks_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"v1", "analytics", "analyticsNumberOfTasks", "projects", "projectId", "users", "userId"}, ""))
 
 	pattern_AnalyticsService_InsertAnalyticsNumberOfTasks_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsNumberOfTasks"}, ""))
 
@@ -1319,7 +1575,7 @@ var (
 
 	pattern_AnalyticsService_DecreaseAnalyticsNumberOfTasksTaskCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "analytics", "analyticsNumberOfTasks", "decrease"}, ""))
 
-	pattern_AnalyticsService_GetAnalyticsNumberOfTasksByStatusTaskCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsNumberOfTasksTaskCount"}, ""))
+	pattern_AnalyticsService_GetAnalyticsNumberOfTasksByStatusTaskCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6, 2, 7, 1, 0, 4, 1, 5, 7}, []string{"v1", "analytics", "analyticsNumberOfTasksTaskCount", "projects", "projectId", "users", "userId", "taskStatus"}, ""))
 
 	pattern_AnalyticsService_InsertAnalyticsNumberOfTasksByStatusTaskCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsNumberOfTasksTaskCount"}, ""))
 
@@ -1327,19 +1583,19 @@ var (
 
 	pattern_AnalyticsService_DecreaseAnalyticsNumberOfTasksByStatusTaskCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "analytics", "analyticsNumberOfTasksTaskCount", "decrease"}, ""))
 
-	pattern_AnalyticsService_GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"}, ""))
+	pattern_AnalyticsService_GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6, 2, 7, 1, 0, 4, 1, 5, 8}, []string{"v1", "analytics", "analyticsForEachTaskHowMuchTimeWasInEachStatusRequest", "projects", "projectId", "users", "userId", "tasks", "taskId"}, ""))
 
 	pattern_AnalyticsService_InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"}, ""))
 
 	pattern_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"}, ""))
 
-	pattern_AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"}, ""))
+	pattern_AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"v1", "analytics", "analyticsForEachUserOnWhichTasksIsHeCurrentlyOn", "projects", "projectId", "users", "userId"}, ""))
 
 	pattern_AnalyticsService_InsertAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"}, ""))
 
 	pattern_AnalyticsService_RemoveAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"}, ""))
 
-	pattern_AnalyticsService_InsertAnalyticsIsProjectFinishedByDeadline_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsIsProjectFinishedByDeadline"}, ""))
+	pattern_AnalyticsService_InsertAnalyticsIsProjectFinishedByDeadline_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"v1", "analytics", "analyticsIsProjectFinishedByDeadline", "projects", "projectId", "users", "userId"}, ""))
 
 	pattern_AnalyticsService_IsProjectFinishedByDeadline_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsIsProjectFinishedByDeadline"}, ""))
 )
