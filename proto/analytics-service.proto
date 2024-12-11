@@ -78,7 +78,7 @@ service AnalyticsService {
     }
 
     // 4. ANALYTICS FOR EACH USER ON WHICH TASKS IS HE CURRENTLY ON METHODS - GET, INSERT, REMOVE
-    rpc GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse) {
+    rpc GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (TaskIdsListRespnse) {
         option (google.api.http) = {
             get: "/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
         };
@@ -164,7 +164,13 @@ message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest {
 }
 
 message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse {
-    map<string, string> taskIds = 1;
+    string projectId = 1;
+    string userId = 2;
+    string taskId = 3;
+}
+
+message TaskIdsListRespnse {
+    repeated string taskIds = 1;
 }
 
 message AnalyticsIsProjectFinishedByDeadlineRequest {
