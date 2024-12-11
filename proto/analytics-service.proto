@@ -160,6 +160,7 @@ message AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse {
 message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest {
     string projectId = 1;
     string userId = 2;
+    string taskId = 3;
 }
 
 message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse {
