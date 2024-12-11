@@ -321,7 +321,7 @@ func local_request_AnalyticsService_InsertAnalyticsForEachTaskHowMuchTimeWasInEa
 
 }
 
-func request_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(ctx context.Context, marshaler runtime.Marshaler, client AnalyticsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(ctx context.Context, marshaler runtime.Marshaler, client AnalyticsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest
 	var metadata runtime.ServerMetadata
 
@@ -329,12 +329,12 @@ func request_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachSt
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(ctx context.Context, marshaler runtime.Marshaler, server AnalyticsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(ctx context.Context, marshaler runtime.Marshaler, server AnalyticsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest
 	var metadata runtime.ServerMetadata
 
@@ -342,7 +342,7 @@ func local_request_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasIn
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx, &protoReq)
+	msg, err := server.UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -764,7 +764,7 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 
 	})
 
-	mux.Handle("PUT", pattern_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -772,12 +772,12 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -785,7 +785,7 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 			return
 		}
 
-		forward_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1175,25 +1175,25 @@ func RegisterAnalyticsServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 
 	})
 
-	mux.Handle("PUT", pattern_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus", runtime.WithHTTPPathPattern("/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1331,7 +1331,7 @@ var (
 
 	pattern_AnalyticsService_InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"}, ""))
 
-	pattern_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"}, ""))
+	pattern_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"}, ""))
 
 	pattern_AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"}, ""))
 
@@ -1365,7 +1365,7 @@ var (
 
 	forward_AnalyticsService_InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.ForwardResponseMessage
 
-	forward_AnalyticsService_IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.ForwardResponseMessage
+	forward_AnalyticsService_UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus_0 = runtime.ForwardResponseMessage
 
 	forward_AnalyticsService_GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0 = runtime.ForwardResponseMessage
 

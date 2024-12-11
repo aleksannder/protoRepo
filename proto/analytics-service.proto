@@ -70,7 +70,7 @@ service AnalyticsService {
             body: "*"
         };
     }
-    rpc IncreaseAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
+    rpc UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
         option (google.api.http) = {
             put: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"
             body: "*"
