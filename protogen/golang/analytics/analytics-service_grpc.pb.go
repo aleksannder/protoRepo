@@ -61,7 +61,7 @@ type AnalyticsServiceClient interface {
 	RemoveAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(ctx context.Context, in *AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest, opts ...grpc.CallOption) (*AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse, error)
 	// 5. ANALYTICS IS PROJECT FINISHED BY DEADLINE METHODS - GET, INSERT
 	InsertAnalyticsIsProjectFinishedByDeadline(ctx context.Context, in *AnalyticsIsProjectFinishedByDeadlineRequest, opts ...grpc.CallOption) (*AnalyticsIsProjectFinishedByDeadlineResponse, error)
-	IsProjectFinishedByDeadline(ctx context.Context, in *AnalyticsIsProjectFinishedByDeadlineRequest, opts ...grpc.CallOption) (*AnalyticsIsProjectFinishedByDeadlineResponse, error)
+	IsProjectFinishedByDeadline(ctx context.Context, in *AnalyticsIsProjectFinishedByDeadlineRequest, opts ...grpc.CallOption) (*IsFinishedResponse, error)
 }
 
 type analyticsServiceClient struct {
@@ -222,9 +222,9 @@ func (c *analyticsServiceClient) InsertAnalyticsIsProjectFinishedByDeadline(ctx 
 	return out, nil
 }
 
-func (c *analyticsServiceClient) IsProjectFinishedByDeadline(ctx context.Context, in *AnalyticsIsProjectFinishedByDeadlineRequest, opts ...grpc.CallOption) (*AnalyticsIsProjectFinishedByDeadlineResponse, error) {
+func (c *analyticsServiceClient) IsProjectFinishedByDeadline(ctx context.Context, in *AnalyticsIsProjectFinishedByDeadlineRequest, opts ...grpc.CallOption) (*IsFinishedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AnalyticsIsProjectFinishedByDeadlineResponse)
+	out := new(IsFinishedResponse)
 	err := c.cc.Invoke(ctx, AnalyticsService_IsProjectFinishedByDeadline_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -256,7 +256,7 @@ type AnalyticsServiceServer interface {
 	RemoveAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(context.Context, *AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) (*AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse, error)
 	// 5. ANALYTICS IS PROJECT FINISHED BY DEADLINE METHODS - GET, INSERT
 	InsertAnalyticsIsProjectFinishedByDeadline(context.Context, *AnalyticsIsProjectFinishedByDeadlineRequest) (*AnalyticsIsProjectFinishedByDeadlineResponse, error)
-	IsProjectFinishedByDeadline(context.Context, *AnalyticsIsProjectFinishedByDeadlineRequest) (*AnalyticsIsProjectFinishedByDeadlineResponse, error)
+	IsProjectFinishedByDeadline(context.Context, *AnalyticsIsProjectFinishedByDeadlineRequest) (*IsFinishedResponse, error)
 	mustEmbedUnimplementedAnalyticsServiceServer()
 }
 
@@ -312,7 +312,7 @@ func (UnimplementedAnalyticsServiceServer) RemoveAnalyticsForEachUserOnWhichTask
 func (UnimplementedAnalyticsServiceServer) InsertAnalyticsIsProjectFinishedByDeadline(context.Context, *AnalyticsIsProjectFinishedByDeadlineRequest) (*AnalyticsIsProjectFinishedByDeadlineResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InsertAnalyticsIsProjectFinishedByDeadline not implemented")
 }
-func (UnimplementedAnalyticsServiceServer) IsProjectFinishedByDeadline(context.Context, *AnalyticsIsProjectFinishedByDeadlineRequest) (*AnalyticsIsProjectFinishedByDeadlineResponse, error) {
+func (UnimplementedAnalyticsServiceServer) IsProjectFinishedByDeadline(context.Context, *AnalyticsIsProjectFinishedByDeadlineRequest) (*IsFinishedResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IsProjectFinishedByDeadline not implemented")
 }
 func (UnimplementedAnalyticsServiceServer) mustEmbedUnimplementedAnalyticsServiceServer() {}

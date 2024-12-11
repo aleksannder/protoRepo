@@ -102,7 +102,7 @@ service AnalyticsService {
             body: "*"
         };
     }
-    rpc IsProjectFinishedByDeadline(AnalyticsIsProjectFinishedByDeadlineRequest) returns (AnalyticsIsProjectFinishedByDeadlineResponse) {
+    rpc IsProjectFinishedByDeadline(AnalyticsIsProjectFinishedByDeadlineRequest) returns (IsFinishedResponse) {
         option (google.api.http) = {
             get: "/v1/analytics/analyticsIsProjectFinishedByDeadline"
         };
