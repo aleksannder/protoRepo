@@ -673,33 +673,6 @@ func request_AnalyticsService_InsertAnalyticsIsProjectFinishedByDeadline_0(ctx c
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["projectId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
-	}
-
-	protoReq.ProjectId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
-	}
-
-	val, ok = pathParams["userId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
-	}
-
-	protoReq.UserId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
-	}
-
 	msg, err := client.InsertAnalyticsIsProjectFinishedByDeadline(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -713,6 +686,19 @@ func local_request_AnalyticsService_InsertAnalyticsIsProjectFinishedByDeadline_0
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
+	msg, err := server.InsertAnalyticsIsProjectFinishedByDeadline(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+var (
+	filter_AnalyticsService_IsProjectFinishedByDeadline_0 = &utilities.DoubleArray{Encoding: map[string]int{"projectId": 0, "userId": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+)
+
+func request_AnalyticsService_IsProjectFinishedByDeadline_0(ctx context.Context, marshaler runtime.Marshaler, client AnalyticsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq AnalyticsIsProjectFinishedByDeadlineRequest
+	var metadata runtime.ServerMetadata
+
 	var (
 		val string
 		ok  bool
@@ -739,19 +725,6 @@ func local_request_AnalyticsService_InsertAnalyticsIsProjectFinishedByDeadline_0
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
 	}
-
-	msg, err := server.InsertAnalyticsIsProjectFinishedByDeadline(ctx, &protoReq)
-	return msg, metadata, err
-
-}
-
-var (
-	filter_AnalyticsService_IsProjectFinishedByDeadline_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
-func request_AnalyticsService_IsProjectFinishedByDeadline_0(ctx context.Context, marshaler runtime.Marshaler, client AnalyticsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq AnalyticsIsProjectFinishedByDeadlineRequest
-	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -768,6 +741,33 @@ func request_AnalyticsService_IsProjectFinishedByDeadline_0(ctx context.Context,
 func local_request_AnalyticsService_IsProjectFinishedByDeadline_0(ctx context.Context, marshaler runtime.Marshaler, server AnalyticsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq AnalyticsIsProjectFinishedByDeadlineRequest
 	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["projectId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "projectId")
+	}
+
+	protoReq.ProjectId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "projectId", err)
+	}
+
+	val, ok = pathParams["userId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
+	}
+
+	protoReq.UserId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "userId", err)
+	}
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -1146,7 +1146,7 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/InsertAnalyticsIsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline/projects/{projectId}/users/{userId}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/InsertAnalyticsIsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1171,7 +1171,7 @@ func RegisterAnalyticsServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/IsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/analytics.AnalyticsService/IsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline/projects/{projectId}/users/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1543,7 +1543,7 @@ func RegisterAnalyticsServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/InsertAnalyticsIsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline/projects/{projectId}/users/{userId}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/InsertAnalyticsIsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1565,7 +1565,7 @@ func RegisterAnalyticsServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/IsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/analytics.AnalyticsService/IsProjectFinishedByDeadline", runtime.WithHTTPPathPattern("/v1/analytics/analyticsIsProjectFinishedByDeadline/projects/{projectId}/users/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1613,9 +1613,9 @@ var (
 
 	pattern_AnalyticsService_RemoveAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"}, ""))
 
-	pattern_AnalyticsService_InsertAnalyticsIsProjectFinishedByDeadline_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"v1", "analytics", "analyticsIsProjectFinishedByDeadline", "projects", "projectId", "users", "userId"}, ""))
+	pattern_AnalyticsService_InsertAnalyticsIsProjectFinishedByDeadline_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsIsProjectFinishedByDeadline"}, ""))
 
-	pattern_AnalyticsService_IsProjectFinishedByDeadline_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "analytics", "analyticsIsProjectFinishedByDeadline"}, ""))
+	pattern_AnalyticsService_IsProjectFinishedByDeadline_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"v1", "analytics", "analyticsIsProjectFinishedByDeadline", "projects", "projectId", "users", "userId"}, ""))
 )
 
 var (
