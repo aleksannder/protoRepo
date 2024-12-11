@@ -164,9 +164,7 @@ message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest {
 }
 
 message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse {
-    string projectId = 1;
-    string userId = 2;
-    string taskId = 3;
+    map<string, string> taskIds = 1;
 }
 
 message AnalyticsIsProjectFinishedByDeadlineRequest {
