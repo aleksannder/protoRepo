@@ -179,6 +179,5 @@ message AnalyticsIsProjectFinishedByDeadlineRequest {
 message AnalyticsIsProjectFinishedByDeadlineResponse {
     string projectId = 1;
     string userId = 2;
-    google.protobuf.Timestamp deadline = 3;
-    google.protobuf.Timestamp finished = 4;
+    bool isFinishedByDeadline = 3;
 }
