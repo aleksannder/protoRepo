@@ -8,185 +8,36 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 service AnalyticsService {
-    // 1. ANALYTICS NUMBER OF TASKS METHODS - GET, INSERT, INCREASE AND DECREASE
-    rpc GetAnalyticsNumberOfTasks(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
+    rpc GetAnalyticsForProject (GetAnalyticsForProjectRequest) returns (GetAnalyticsForProjectResponse) {
         option (google.api.http) = {
-            get: "/v1/analytics/analyticsNumberOfTasks/projects/{projectId}/users/{userId}"
+            get: "/v1/analytics/{projectId}"
         };
     }
-    rpc InsertAnalyticsNumberOfTasks(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
-        option (google.api.http) = {
-            post: "/v1/analytics/analyticsNumberOfTasks"
-            body: "*"
-        };
-    }
-    rpc IncreaseAnalyticsNumberOfTasksTaskCount(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
-        option (google.api.http) = {
-            put: "/v1/analytics/analyticsNumberOfTasks/increase"
-            body: "*"
-        };
-    }
-    rpc DecreaseAnalyticsNumberOfTasksTaskCount(AnalyticsNumberOfTasksRequest) returns (AnalyticsNumberOfTasksResponse) {
-        option (google.api.http) = {
-            put: "/v1/analytics/analyticsNumberOfTasks/decrease"
-            body: "*"
-        };
-    }
-
-    // 2. ANALYTICS NUMBER OF TASKS BY TASK STATUS METHODS - GET, INSERT, INCREASE AND DECREASE
-    rpc GetAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
-        option (google.api.http) = {
-            get: "/v1/analytics/analyticsNumberOfTasksTaskCount/projects/{projectId}/users/{userId}/taskStatus/{taskStatus}"
-        };
-    }
-    rpc InsertAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
-        option (google.api.http) = {
-            post: "/v1/analytics/analyticsNumberOfTasksTaskCount"
-            body: "*"
-        };
-    }
-    rpc IncreaseAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
-        option (google.api.http) = {
-            put: "/v1/analytics/analyticsNumberOfTasksTaskCount/increase"
-            body: "*"
-        };
-    }
-    rpc DecreaseAnalyticsNumberOfTasksByStatusTaskCount(AnalyticsNumberOfTasksByStatusRequest) returns (AnalyticsNumberOfTasksByStatusResponse) {
-        option (google.api.http) = {
-            put: "/v1/analytics/analyticsNumberOfTasksTaskCount/decrease"
-            body: "*"
-        };
-    }
-
-    // 3. ANALYTICS FOR EACH TASK HOW MUCH TIME WAS IN EACH STATUS METHODS - GET, INSERT, INCREASE AND DECREASE
-    rpc GetAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse) {
-        option (google.api.http) = {
-            get: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest/projects/{projectId}/users/{userId}/tasks/{taskId}"
-        };
-    }
-    rpc InsertAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
-        option (google.api.http) = {
-            post: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"
-            body: "*"
-        };
-    }
-    rpc UpdateAnalyticsForEachTaskHowMuchTimeWasInEachStatus(AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest) returns (AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse) {
-        option (google.api.http) = {
-            put: "/v1/analytics/analyticsForEachTaskHowMuchTimeWasInEachStatusRequest"
-            body: "*"
-        };
-    }
-
-    // 4. ANALYTICS FOR EACH USER ON WHICH TASKS IS HE CURRENTLY ON METHODS - GET, INSERT, REMOVE
-    rpc GetAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (TaskIdsListRespnse) {
-        option (google.api.http) = {
-            get: "/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn/projects/{projectId}/users/{userId}"
-        };
-    }
-    rpc InsertAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse) {
-        option (google.api.http) = {
-            post: "/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
-            body: "*"    
-        };
-    }
-    rpc RemoveAnalyticsForEachUserOnWhichTasksIsHeCurrentlyOn(AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest) returns (AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse) {
-        option (google.api.http) = {
-            delete: "/v1/analytics/analyticsForEachUserOnWhichTasksIsHeCurrentlyOn"
-        };
-    }
-
-    // 5. ANALYTICS IS PROJECT FINISHED BY DEADLINE METHODS - GET, INSERT
-    rpc InsertAnalyticsIsProjectFinishedByDeadline(AnalyticsIsProjectFinishedByDeadlineRequest) returns (AnalyticsIsProjectFinishedByDeadlineResponse) {
-        option (google.api.http) = {
-            post: "/v1/analytics/analyticsIsProjectFinishedByDeadline"
-            body: "*"
-        };
-    }
-    rpc IsProjectFinishedByDeadline(AnalyticsIsProjectFinishedByDeadlineRequest) returns (IsFinishedResponse) {
-        option (google.api.http) = {
-            get: "/v1/analytics/analyticsIsProjectFinishedByDeadline/projects/{projectId}/users/{userId}"
-        };
-    }
-
 }
 
-
-message AnalyticsNumberOfTasksRequest {
+message GetAnalyticsForProjectRequest {
     string projectId = 1;
-    string userId = 2;
 }
 
-message AnalyticsNumberOfTasksResponse {
-    string projectId = 1;
-    string userId = 2;
-    int32 taskCount = 3;
+message GetAnalyticsForProjectResponse {
+    int32 taskCount = 1;
+    map<string, int32> tasksByStatus = 2;
+
+    repeated TaskDuration taskDurations = 3;
+    repeated UserAssignment userAssignments = 4;
+
+    bool finishedBeforeDeadline = 5;
+    google.protobuf.Timestamp expectedEndDate = 6;
+    google.protobuf.Timestamp actualEndDate = 7;
+
 }
 
-message AnalyticsNumberOfTasksByStatusRequest {
-    string projectId = 1;
-    string userId = 2;
-    string taskStatus = 3;
+message TaskDuration {
+    string taskId = 1;
+    map<string, int64> durationsByState = 3;
 }
 
-message AnalyticsNumberOfTasksByStatusResponse {
-    string projectId = 1;
-    string userId = 2;
-    int32 taskCount = 3;
-    string taskStatus = 4;
-}
-
-message AnalyticsForEachTaskHowMuchTimeWasInEachStatusRequest {
-    string projectId = 1;
-    string userId = 2;
-    string taskId = 3;
-    string taskStatus = 4;
-    google.protobuf.Timestamp statusStartTime = 5;
-    google.protobuf.Timestamp statusEndTime = 6;
-}
-
-message AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse {
-    string projectId = 1;
-    string userId = 2;
-    string taskId = 3;
-    string taskStatus = 4;
-    google.protobuf.Timestamp statusStartTime = 5;
-    google.protobuf.Timestamp statusEndTime = 6;
-}
-
-message AnalyticsForEachTaskHowMuchTimeWasInEachStatusListResponse {
-    repeated AnalyticsForEachTaskHowMuchTimeWasInEachStatusResponse responses = 1;
-}
-
-message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnRequest {
-    string projectId = 1;
-    string userId = 2;
-    string taskId = 3;
-}
-
-message AnalyticsForEachUserOnWhichTasksIsHeCurrentlyOnResponse {
-    string projectId = 1;
-    string userId = 2;
-    string taskId = 3;
-}
-
-message TaskIdsListRespnse {
-    repeated string taskIds = 1;
-}
-
-message AnalyticsIsProjectFinishedByDeadlineRequest {
-    string projectId = 1;
-    string userId = 2;
-    google.protobuf.Timestamp deadline = 3;
-    google.protobuf.Timestamp finished = 4;
-}
-
-message AnalyticsIsProjectFinishedByDeadlineResponse {
-    string projectId = 1;
-    string userId = 2;
-    google.protobuf.Timestamp deadline = 3;
-    google.protobuf.Timestamp finished = 4;
-}
-
-message IsFinishedResponse {
-    bool isFinishedByDeadline = 3;
+message UserAssignment {
+    string username = 1;
+    repeated string taskIds = 2;
 }
