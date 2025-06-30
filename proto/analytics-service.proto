@@ -23,12 +23,13 @@ message GetAnalyticsForProjectResponse {
     int32 taskCount = 1;
     map<string, int32> tasksByStatus = 2;
 
-    repeated TaskDuration taskDurations = 3;
-    repeated UserAssignment userAssignments = 4;
+    map<string, string> taskNames = 3;
+    repeated TaskDuration taskDurations = 4;
+    repeated UserAssignment userAssignments = 5;
 
-    bool finishedBeforeDeadline = 5;
-    google.protobuf.Timestamp expectedEndDate = 6;
-    google.protobuf.Timestamp actualEndDate = 7;
+    bool finishedBeforeDeadline = 6;
+    google.protobuf.Timestamp expectedEndDate = 7;
+    google.protobuf.Timestamp actualEndDate = 8;
 
 }
 
