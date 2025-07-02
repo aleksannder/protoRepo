@@ -17,6 +17,7 @@ service AnalyticsService {
 
 message GetAnalyticsForProjectRequest {
     string projectId = 1;
+    string username = 2;
 }
 
 message GetAnalyticsForProjectResponse {
