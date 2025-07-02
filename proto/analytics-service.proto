@@ -10,7 +10,7 @@ import "google/protobuf/timestamp.proto";
 service AnalyticsService {
     rpc GetAnalyticsForProject (GetAnalyticsForProjectRequest) returns (GetAnalyticsForProjectResponse) {
         option (google.api.http) = {
-            get: "/v1/analytics/{projectId}"
+            get: "/v1/analytics/{projectId}/users/{username}"
         };
     }
 }
