@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package project;
 
-option go_package = "proto/project";
+option go_package = "github.com/aleksannder/proto-repo/protogen/golang/projectr;project";
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";

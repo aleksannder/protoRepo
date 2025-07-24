@@ -2,8 +2,7 @@ syntax = "proto3";
 
 package workflow;
 
-option go_package = "proto/workflow";
-
+option go_package = "github.com/aleksannder/proto-repo/protogen/golang/workflow;workflow";
 import "google/api/annotations.proto";
 
 service WorkflowService {

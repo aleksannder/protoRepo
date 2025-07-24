@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package task;
 
-option go_package = "proto/task";
+option go_package = "github.com/aleksannder/proto-repo/protogen/golang/task;task";
 
 import "google/api/annotations.proto";
 import "google/api/httpbody.proto";
