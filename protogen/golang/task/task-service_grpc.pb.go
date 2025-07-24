@@ -20,14 +20,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	TaskService_InsertTask_FullMethodName              = "/task.TaskService/InsertTask"
-	TaskService_ChangeTaskState_FullMethodName         = "/task.TaskService/ChangeTaskState"
-	TaskService_FindAllTasks_FullMethodName            = "/task.TaskService/FindAllTasks"
-	TaskService_FindTaskById_FullMethodName            = "/task.TaskService/FindTaskById"
-	TaskService_FindAllTasksByProjectID_FullMethodName = "/task.TaskService/FindAllTasksByProjectID"
-	TaskService_UpdateTask_FullMethodName              = "/task.TaskService/UpdateTask"
-	TaskService_DocumentUpload_FullMethodName          = "/task.TaskService/DocumentUpload"
-	TaskService_DocumentDownload_FullMethodName        = "/task.TaskService/DocumentDownload"
+	TaskService_InsertTask_FullMethodName                   = "/task.TaskService/InsertTask"
+	TaskService_ChangeTaskState_FullMethodName              = "/task.TaskService/ChangeTaskState"
+	TaskService_FindAllTasks_FullMethodName                 = "/task.TaskService/FindAllTasks"
+	TaskService_FindTaskById_FullMethodName                 = "/task.TaskService/FindTaskById"
+	TaskService_CheckIfUserHasUnfinishedTask_FullMethodName = "/task.TaskService/CheckIfUserHasUnfinishedTask"
+	TaskService_FindAllTasksByProjectID_FullMethodName      = "/task.TaskService/FindAllTasksByProjectID"
+	TaskService_UpdateTask_FullMethodName                   = "/task.TaskService/UpdateTask"
+	TaskService_DocumentUpload_FullMethodName               = "/task.TaskService/DocumentUpload"
+	TaskService_DocumentDownload_FullMethodName             = "/task.TaskService/DocumentDownload"
 )
 
 // TaskServiceClient is the client API for TaskService service.
@@ -38,6 +39,7 @@ type TaskServiceClient interface {
 	ChangeTaskState(ctx context.Context, in *ChangeTaskStateRequest, opts ...grpc.CallOption) (*FindTaskByIdResponse, error)
 	FindAllTasks(ctx context.Context, in *FindAllTasksRequest, opts ...grpc.CallOption) (*FindAllTasksResponse, error)
 	FindTaskById(ctx context.Context, in *FindTaskByIdRequest, opts ...grpc.CallOption) (*FindTaskByIdResponse, error)
+	CheckIfUserHasUnfinishedTask(ctx context.Context, in *CheckIfUserHasUnfinishedTaskRequest, opts ...grpc.CallOption) (*CheckIfUserHasUnfinishedTaskResponse, error)
 	FindAllTasksByProjectID(ctx context.Context, in *FindAllTasksByProjectIDRequest, opts ...grpc.CallOption) (*FindAllTasksByProjectIDResponse, error)
 	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskResponse, error)
 	DocumentUpload(ctx context.Context, opts ...grpc.CallOption) (TaskService_DocumentUploadClient, error)
@@ -82,6 +84,15 @@ func (c *taskServiceClient) FindAllTasks(ctx context.Context, in *FindAllTasksRe
 func (c *taskServiceClient) FindTaskById(ctx context.Context, in *FindTaskByIdRequest, opts ...grpc.CallOption) (*FindTaskByIdResponse, error) {
 	out := new(FindTaskByIdResponse)
 	err := c.cc.Invoke(ctx, TaskService_FindTaskById_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) CheckIfUserHasUnfinishedTask(ctx context.Context, in *CheckIfUserHasUnfinishedTaskRequest, opts ...grpc.CallOption) (*CheckIfUserHasUnfinishedTaskResponse, error) {
+	out := new(CheckIfUserHasUnfinishedTaskResponse)
+	err := c.cc.Invoke(ctx, TaskService_CheckIfUserHasUnfinishedTask_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -180,6 +191,7 @@ type TaskServiceServer interface {
 	ChangeTaskState(context.Context, *ChangeTaskStateRequest) (*FindTaskByIdResponse, error)
 	FindAllTasks(context.Context, *FindAllTasksRequest) (*FindAllTasksResponse, error)
 	FindTaskById(context.Context, *FindTaskByIdRequest) (*FindTaskByIdResponse, error)
+	CheckIfUserHasUnfinishedTask(context.Context, *CheckIfUserHasUnfinishedTaskRequest) (*CheckIfUserHasUnfinishedTaskResponse, error)
 	FindAllTasksByProjectID(context.Context, *FindAllTasksByProjectIDRequest) (*FindAllTasksByProjectIDResponse, error)
 	UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskResponse, error)
 	DocumentUpload(TaskService_DocumentUploadServer) error
@@ -202,6 +214,9 @@ func (UnimplementedTaskServiceServer) FindAllTasks(context.Context, *FindAllTask
 }
 func (UnimplementedTaskServiceServer) FindTaskById(context.Context, *FindTaskByIdRequest) (*FindTaskByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindTaskById not implemented")
+}
+func (UnimplementedTaskServiceServer) CheckIfUserHasUnfinishedTask(context.Context, *CheckIfUserHasUnfinishedTaskRequest) (*CheckIfUserHasUnfinishedTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckIfUserHasUnfinishedTask not implemented")
 }
 func (UnimplementedTaskServiceServer) FindAllTasksByProjectID(context.Context, *FindAllTasksByProjectIDRequest) (*FindAllTasksByProjectIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindAllTasksByProjectID not implemented")
@@ -296,6 +311,24 @@ func _TaskService_FindTaskById_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TaskServiceServer).FindTaskById(ctx, req.(*FindTaskByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_CheckIfUserHasUnfinishedTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckIfUserHasUnfinishedTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).CheckIfUserHasUnfinishedTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_CheckIfUserHasUnfinishedTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).CheckIfUserHasUnfinishedTask(ctx, req.(*CheckIfUserHasUnfinishedTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -405,6 +438,10 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FindTaskById",
 			Handler:    _TaskService_FindTaskById_Handler,
+		},
+		{
+			MethodName: "CheckIfUserHasUnfinishedTask",
+			Handler:    _TaskService_CheckIfUserHasUnfinishedTask_Handler,
 		},
 		{
 			MethodName: "FindAllTasksByProjectID",

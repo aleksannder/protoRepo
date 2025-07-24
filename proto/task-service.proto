@@ -31,6 +31,11 @@ service TaskService {
       get: "/v1/tasks/{taskId}"
     };
   }
+  rpc CheckIfUserHasUnfinishedTask(CheckIfUserHasUnfinishedTaskRequest) returns (CheckIfUserHasUnfinishedTaskResponse) {
+    option (google.api.http) = {
+      get: "/v1/tasks/{projectId}/{userId}"
+    };
+  }
   rpc FindAllTasksByProjectID(FindAllTasksByProjectIDRequest) returns (FindAllTasksByProjectIDResponse) {
     option (google.api.http) = {
       get: "/v1/tasks/project/{projectId}"
@@ -153,3 +158,12 @@ message DownloadDocumentRequest {
   string fileName = 2;
 }
 
+message CheckIfUserHasUnfinishedTaskRequest {
+  string projectId = 1;
+  string userId = 2;
+}
+
+message CheckIfUserHasUnfinishedTaskResponse {
+  bool finishedAllTasks = 1;
+  string message = 2;
+}
