@@ -123,6 +123,7 @@ message FindAllTasksByProjectIDRequest {
 
 message FindAllTasksByProjectIDResponse {
   repeated FindTaskByIdResponse tasks = 1;
+  repeated GetWorkflowsByProjectIdResponse workflows = 2;
 }
 
 message UpdateTaskRequest {
@@ -149,4 +150,21 @@ message UploadResponse {
 message DownloadDocumentRequest {
   string taskId = 1;
   string fileName = 2;
+}
+
+message GetWorkflowsByProjectIdResponse {
+  repeated Workflow workflows = 1;
+}
+
+message Workflow {
+  string projectId = 4;
+  repeated Task tasks = 5;
+}
+
+message Task {
+  string id = 1;
+  string name = 2;
+  repeated string dependsOn = 3;
+  bool blocked = 4;
+  bool finished = 5;
 }
