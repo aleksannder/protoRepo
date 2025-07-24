@@ -6,7 +6,7 @@ option go_package = "proto/task";
 
 import "google/api/annotations.proto";
 import "google/api/httpbody.proto";
-import "proto/workflow-service.proto";
+import "workflow-service.proto";
 
 service TaskService {
   rpc InsertTask(InsertTaskRequest) returns (InsertTaskResponse) {
